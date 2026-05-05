@@ -111,7 +111,7 @@ get_header();
             Vielleicht hast du bisher nur in die falsche Richtung geguckt.
         </p>
 
-        <p class="egs-beschreibung">Für Menschen, die viel versucht haben. Die gelesen, analysiert, verstanden haben – und merken, dass der nächste Schritt kein neuer Ansatz ist.
+        <p class="egs-beschreibung">Für Menschen, die merken, dass der nächste Schritt kein neuer Ansatz ist.
 
 eigengrund begleitet – ohne Methode, ohne Versprechen, ohne dass du etwas leisten musst.</p>
 
