@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(git commit *)",
+      "Bash(git -C \"C:\\\\Users\\\\malte\\\\eigengrund-space\\\\themes\\\\eigengrund-child\" add style.css functions.php)",
+      "Bash(git -C 'C:\\\\Users\\\\malte\\\\eigengrund-space\\\\themes\\\\eigengrund-child' commit -m ' *)",
+      "Bash(git -C \"C:\\\\Users\\\\malte\\\\eigengrund-space\\\\themes\\\\eigengrund-child\" push origin staging)",
+      "Bash(git -C \"C:\\\\Users\\\\malte\\\\eigengrund-space\\\\themes\\\\eigengrund-child\" add page-startseite.php)",
+      "Bash(git -C \"C:\\\\Users\\\\malte\\\\eigengrund-space\\\\themes\\\\eigengrund-child\" add style.css)"
+    ]
+  }
+}
