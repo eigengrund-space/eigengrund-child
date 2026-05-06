@@ -111,9 +111,7 @@ get_header();
             Vielleicht hast du bisher nur in die falsche Richtung geguckt.
         </p>
 
-        <p class="egs-beschreibung">Für Menschen, die merken, dass der nächste Schritt kein neuer Ansatz ist.
-
-eigengrund begleitet – ohne Methode, ohne Versprechen, ohne dass du etwas leisten musst.</p>
+        <p class="egs-beschreibung">Für dich, wenn du ahnst, dass der nächste Schritt nicht mehr im Kopf liegt.</p></br>
 
         <a href="#was-ist-das" class="egs-scroll-hint">&#8595; Was dich hier erwartet</a>
     </div>
