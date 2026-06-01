@@ -14,7 +14,7 @@ get_header();
 
 /* ── HERO ── */
 .egs-hero {
-    background: linear-gradient(160deg, #F2D9A0 0%, #E0A06A 55%, #C06840 100%);
+    background: linear-gradient(150deg, #FAF0D8 0%, #F0C88A 40%, #D4956A 80%, #C07850 100%);
     padding: 10rem 6% 5rem;
     position: relative;
     overflow: hidden;
@@ -26,7 +26,7 @@ get_header();
     position: absolute; right: -1rem; bottom: -2rem;
     font-family: 'Cormorant Garamond', serif;
     font-size: 22vw; font-weight: 300; font-style: italic;
-    color: rgba(30,27,20,.05); line-height: 1;
+    color: rgba(30,27,20,.02); line-height: 1;
     pointer-events: none; user-select: none;
 }
 .egs-hero-inner {
