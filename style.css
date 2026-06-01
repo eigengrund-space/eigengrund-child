@@ -999,7 +999,7 @@ body {
   padding-top: var(--eg-nav-height, 64px) !important;
 }
 
-/* Navigation: via Customizer → Zusätzliches CSS */
+/* Navigation: via style.css */
 
 /* ── KADENCE SECTION / ROW BLÖCKE ── */
 .kt-row-column-wrap,
@@ -1010,13 +1010,14 @@ body {
 /* ── KADENCE INFOBOX / KARTEN ── */
 .kt-blocks-info-box-link-wrap,
 .kb-info-box {
-  border: .5px solid rgba(30,27,20,.1) !important;
-  border-radius: 2px !important;
-  background: #F0EBE3 !important;
-  transition: background .2s;
+  border: .5px solid var(--eg-border) !important;
+  border-radius: var(--eg-radius-sm) !important;
+  background: var(--global-palette9) !important;
+  transition: background var(--eg-transition);
 }
 .kt-blocks-info-box-link-wrap:hover {
-  background: #E8E2D8 !important;
+  background: var(--global-palette7) !important;
+  border-color: var(--eg-tag-b) !important;
 }
 
 /* ── KADENCE DIVIDER / TRENNLINIE ── */
@@ -1116,6 +1117,89 @@ ol.wp-block-list {
   max-width: 100% !important;
   width: 100vw !important;
   margin-left: calc(-50vw + 50%) !important;
+}
+
+/* ── KADENCE NAVIGATION OVERRIDES ── */
+.main-navigation a,
+.kadence-navigation a,
+header .menu a {
+  font-family: var(--eg-font-sans);
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-weight: 300;
+  color: rgba(30,27,20,.65);
+}
+.main-navigation a:hover,
+.kadence-navigation a:hover {
+  color: var(--eg-text);
+}
+.main-navigation .sub-menu,
+.kadence-navigation .sub-menu {
+  background: var(--eg-bg);
+  border: .5px solid var(--eg-border);
+  box-shadow: 0 4px 16px rgba(30,27,20,.08);
+}
+.main-navigation .sub-menu a,
+.kadence-navigation .sub-menu a {
+  color: var(--eg-text-muted);
+}
+.main-navigation .sub-menu a:hover,
+.kadence-navigation .sub-menu a:hover {
+  color: var(--eg-text);
+  background: var(--eg-bg-disc);
+}
+.main-navigation a[href*="mitgliederbereich"],
+.main-navigation a[href*="anmelden"],
+.kadence-navigation a[href*="mitgliederbereich"],
+.kadence-navigation a[href*="anmelden"] {
+  color: var(--eg-accent);
+  border: .5px solid var(--eg-tag-b);
+  padding: .3rem .85rem;
+  border-radius: var(--eg-radius-sm);
+  transition: background var(--eg-transition);
+}
+.main-navigation a[href*="mitgliederbereich"]:hover,
+.kadence-navigation a[href*="anmelden"]:hover {
+  background: rgba(139,69,19,.06);
+}
+
+/* ── STARTSEITE: PADDING & HEADER ── */
+body {
+  padding-top: 0;
+}
+body.page-template-page-startseite .site-header,
+body.page-template-page-startseite #masthead {
+  background: transparent;
+  border-bottom: none;
+  backdrop-filter: none;
+}
+
+/* ── FLIESSTEXT ── */
+.entry-content,
+.entry-content p,
+.wp-block-paragraph {
+  text-align: left;
+}
+
+/* ── ZEILENHÖHE ── */
+body, p, .entry-content p {
+  line-height: 1.9;
+}
+h1, h2, h3, h4 {
+  line-height: 1.2;
+}
+
+/* ── FAQ FRAGEN ── */
+.eg-faq__frage-text {
+  text-transform: none;
+  letter-spacing: 0;
+  font-family: var(--eg-font-serif);
+  font-weight: 300;
+  font-style: normal;
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--eg-text);
 }
 
 /* ── FOOTER ── */
