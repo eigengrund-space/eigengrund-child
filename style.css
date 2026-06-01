@@ -1087,8 +1087,8 @@ ol.wp-block-list {
 
 /* Karte / Gruppe */
 .wp-block-group.is-style-card {
-  background: #FDF9F5;
-  border: .5px solid rgba(30,27,20,.1);
+  background: var(--global-palette9);
+  border: .5px solid var(--eg-border);
   border-radius: 2px;
   padding: 1.5rem;
 }
@@ -1181,7 +1181,7 @@ body.eg-dark #colophon {
   overflow: hidden;
 }
 .eg-start-eb-section > div[style*="grid"] > div {
-  background: #F0EBE3 !important;
+  background: var(--global-palette9) !important;
   padding: 1.5rem !important;
   display: flex !important;
   flex-direction: column !important;
@@ -1189,7 +1189,7 @@ body.eg-dark #colophon {
   transition: background var(--eg-transition-slow) !important;
 }
 .eg-start-eb-section > div[style*="grid"] > div:hover {
-  background: #E8E2D8 !important;
+  background: var(--global-palette7) !important;
 }
 /* Person-Label (Vorname · Alter) */
 .eg-start-eb-section > div[style*="grid"] > div > div:first-child {
@@ -1236,116 +1236,126 @@ body.eg-dark #colophon {
 }
 
 /* ═══════════════════════════════════════
-   EIGENGRUND KARTEN-SYSTEM
+   EIGENGRUND KARTEN-SYSTEM v2
    .eg-card          – Basis
    .eg-card--link    – anklickbar mit Hover
    .eg-card--text    – Textbox ohne Hover
    .eg-card--nav     – Navigationsliste
+   Farben über Palette-Variablen gesteuert.
+   palette9 = Weiß (Karten)
+   palette8 = Creme (Hintergrund)
+   palette7 = Heller Abschnitt (Hover)
+   palette2 = Dunkelbraun (Akzent/Border Hover)
+   palette1 = Amber (Pfeile, Links Hover)
 ═══════════════════════════════════════ */
 
 .eg-card {
-  background: #FDF9F5;
-  border: .5px solid rgba(30,27,20,.10);
+  background: var(--global-palette9);
+  border: .5px solid var(--eg-border);
   padding: 1.5rem 1.4rem;
   border-radius: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .eg-card--link {
-  display: flex;
-  flex-direction: column;
   align-items: flex-start;
   text-decoration: none;
   color: inherit;
-  transition: background .2s, border-color .2s;
+  transition: background var(--eg-transition), border-color var(--eg-transition);
+  cursor: pointer;
 }
 .eg-card--link:hover {
-  background: #F5EFF0;
-  border-color: rgba(139,69,19,.25);
+  background: var(--global-palette7);
+  border-color: var(--eg-tag-b);
   text-decoration: none;
   color: inherit;
 }
 
 .eg-card--text {
   padding: 1.75rem;
+  cursor: default;
 }
 
 .eg-card--nav {
-  display: flex;
+  flex-direction: row;
   align-items: flex-start;
   gap: 1rem;
   text-decoration: none;
   color: inherit;
-  transition: background .2s, border-color .2s;
+  transition: background var(--eg-transition), border-color var(--eg-transition);
+  cursor: pointer;
 }
 .eg-card--nav:hover {
-  background: #F5EFF0;
-  border-color: rgba(139,69,19,.25);
+  background: var(--global-palette7);
+  border-color: var(--eg-tag-b);
   text-decoration: none;
   color: inherit;
 }
 
 .eg-card__title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--eg-font-serif);
   font-weight: 300;
   font-size: clamp(17px, 2vw, 21px);
   line-height: 1.3;
-  color: #1E1B14;
+  color: var(--eg-text);
   margin: 0 0 .5rem;
 }
 
 .eg-card__label {
-  font-family: 'Lato', sans-serif;
+  font-family: var(--eg-font-sans);
   font-size: 10px;
   font-weight: 300;
   letter-spacing: .12em;
   text-transform: uppercase;
-  color: rgba(30,27,20,.45);
+  color: var(--global-palette5);
   margin: 0 0 1rem;
   display: block;
 }
 
 .eg-card__text {
-  font-family: 'Lato', sans-serif;
+  font-family: var(--eg-font-sans);
   font-size: 14px;
   font-weight: 300;
   line-height: 1.8;
-  color: rgba(30,27,20,.72);
+  color: var(--global-palette5);
   margin: 0 0 1.25rem;
 }
 
 .eg-card__link {
-  font-family: 'Lato', sans-serif;
+  font-family: var(--eg-font-sans);
   font-size: 11px;
   font-weight: 300;
   letter-spacing: .10em;
   text-transform: uppercase;
-  color: #8B4513;
+  color: var(--eg-accent);
   text-decoration: none;
+  display: block;
   margin-top: auto;
 }
-.eg-card__link:hover { color: #D4956A; }
+.eg-card__link:hover { color: var(--eg-amber); }
 
 .eg-card__meta {
-  font-family: 'Lato', sans-serif;
+  font-family: var(--eg-font-sans);
   font-size: 13px;
   font-weight: 300;
-  color: #8B4513;
+  color: var(--eg-accent);
   text-decoration: none;
-  display: inline-block;
-  margin-bottom: 1rem;
+  display: block;
+  margin-bottom: .75rem;
 }
-.eg-card__meta:hover { color: #D4956A; }
+.eg-card__meta:hover { color: var(--eg-amber); }
 
 .eg-card__arrow {
-  color: #D4956A;
+  color: var(--eg-amber);
   font-size: 14px;
   line-height: 1.6;
   flex-shrink: 0;
 }
 
 .eg-card--nav .eg-card__title {
+  font-family: var(--eg-font-sans);
   font-size: 15px;
-  font-family: 'Lato', sans-serif;
   font-weight: 400;
   margin-bottom: .2rem;
 }
