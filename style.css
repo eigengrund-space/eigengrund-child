@@ -981,25 +981,15 @@ a:hover { color: #D4956A; }
 }
 
 /* ── KADENCE NAVIGATION ── */
+/* Position und Sticky: via Kadence Customizer → Header → Oben gehaltener Header */
+/* Hintergrund Startseite transparent: via Customizer → Zusätzliches CSS */
 .site-header,
 #masthead {
   background: rgba(247,240,230,.96) !important;
   border-bottom: .5px solid rgba(30,27,20,.1) !important;
   backdrop-filter: blur(10px) !important;
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  width: 100% !important;
-  z-index: 9999 !important;
   transition: background-color .4s ease, border-color .4s ease !important;
 }
-
-body {
-  padding-top: var(--eg-nav-height, 64px) !important;
-}
-
-/* Navigation: via style.css */
 
 /* ── KADENCE SECTION / ROW BLÖCKE ── */
 .kt-row-column-wrap,
