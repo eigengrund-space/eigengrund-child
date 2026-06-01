@@ -19,7 +19,7 @@ Text Domain:  eigengrund-child
 
   /* ── FARBEN: TAG-MODUS ── */
   --eg-bg:              #F7F0E6;   /* Seitenhintergrund warm Creme */
-  --eg-bg-card:         #F0EBE3;   /* Karten */
+  --eg-bg-card:         #FDF9F5;   /* Karten */
   --eg-bg-input:        #FFFFFF;   /* Eingabefelder */
   --eg-bg-hint:         rgba(212,149,106,.09);  /* Hinweis-Boxen */
   --eg-bg-example:      #F0EBE3;   /* Beispiel-Boxen */
@@ -1087,7 +1087,7 @@ ol.wp-block-list {
 
 /* Karte / Gruppe */
 .wp-block-group.is-style-card {
-  background: #F0EBE3;
+  background: #FDF9F5;
   border: .5px solid rgba(30,27,20,.1);
   border-radius: 2px;
   padding: 1.5rem;
@@ -1244,7 +1244,7 @@ body.eg-dark #colophon {
 ═══════════════════════════════════════ */
 
 .eg-card {
-  background: #F0EBE3;
+  background: #FDF9F5;
   border: .5px solid rgba(30,27,20,.10);
   padding: 1.5rem 1.4rem;
   border-radius: 0;
@@ -1259,7 +1259,7 @@ body.eg-dark #colophon {
   transition: background .2s, border-color .2s;
 }
 .eg-card--link:hover {
-  background: #E8E2D8;
+  background: #F5EFF0;
   border-color: rgba(139,69,19,.25);
   text-decoration: none;
   color: inherit;
@@ -1278,7 +1278,7 @@ body.eg-dark #colophon {
   transition: background .2s, border-color .2s;
 }
 .eg-card--nav:hover {
-  background: #E8E2D8;
+  background: #F5EFF0;
   border-color: rgba(139,69,19,.25);
   text-decoration: none;
   color: inherit;
