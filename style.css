@@ -22,7 +22,7 @@ Text Domain:  eigengrund-child
   --eg-bg-card:         #FFFFFF;   /* Karten, Inputs */
   --eg-bg-input:        #FFFFFF;   /* Eingabefelder */
   --eg-bg-hint:         rgba(212,149,106,.09);  /* Hinweis-Boxen */
-  --eg-bg-example:      rgba(30,27,20,.025);    /* Beispiel-Boxen */
+  --eg-bg-example:      rgba(237,229,213,.5);    /* Beispiel-Boxen */
   --eg-bg-disc:         rgba(30,27,20,.04);     /* Disclaimer */
   --eg-bg-success:      rgba(212,149,106,.09);  /* Erfolgs-Meldung */
   --eg-bg-section:      #F0E8D8;   /* Abschnitt-Hintergrund */
