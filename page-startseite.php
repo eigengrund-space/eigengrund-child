@@ -14,7 +14,7 @@ get_header();
 
 /* ── HERO ── */
 .egs-hero {
-    background: linear-gradient(160deg, #EEC98A 0%, #D4956A 55%, #B8613A 100%);
+    background: linear-gradient(160deg, #F2D9A0 0%, #E0A06A 55%, #C06840 100%);
     padding: 10rem 6% 5rem;
     position: relative;
     overflow: hidden;
