@@ -10,6 +10,36 @@ Text Domain:  eigengrund-child
 */
 
 /* ============================================================
+   INHALTSVERZEICHNIS
+   ============================================================
+
+   1.  DESIGN TOKENS          - CSS-Variablen, Farben, Abstaende
+   2.  DARK MODE              - body.eg-dark Overrides
+   3.  BASIS                  - Box-Sizing, Scroll, Body
+   4.  TYPOGRAFIE             - Ueberschriften, Fliesstext
+   5.  NAVIGATION             - .eg-nav, Logo, Links, Toggle
+   6.  BUTTONS                - alle Button-Varianten
+   7.  BADGES & TAGS          - .eg-tag, .eg-badge
+   8.  KARTEN                 - .eg-card Varianten
+   9.  THEMEN-KARTE           - .eg-thema-card, Grid
+   10. SIDEBAR                - .eg-sidebar-card
+   11. FORMULARE              - Input, Textarea, Checkbox
+   12. MODAL                  - .eg-modal-overlay
+   13. AUDIO PLAYER           - .eg-audio-pill
+   14. STILLES ARCHIV         - .eg-archiv-entry
+   15. DISCLAIMER             - .eg-disclaimer
+   16. LAYOUT                 - .eg-container, Sidebar-Grid
+   17. FOOTER                 - .eg-footer
+   18. HONEYPOT               - .eg-hp
+   19. RESPONSIVE             - Media Queries
+   20. KADENCE OVERRIDES      - Palette, Typo, Nav, Bloecke
+   21. KARTEN-SYSTEM v2       - .eg-card neu
+   22. EMOTIONSRAEUME         - .eg-raum, .eg-einheit etc.
+
+   ============================================================ */
+
+
+/* ============================================================
    EIGENGRUND DESIGN TOKENS
    Alle gestalterischen Entscheidungen an einer einzigen Stelle.
    Farbe ändern? Hier. Abstand ändern? Hier. Schrift ändern? Hier.
@@ -70,8 +100,8 @@ Text Domain:  eigengrund-child
   --eg-modal-bg:        rgba(20,16,10,.58);
 
   /* ── SCHRIFTEN ── */
-  --eg-font-serif:      'Cormorant Garamond', serif;
-  --eg-font-sans:       'Lato', sans-serif;
+  --eg-font-serif:      var(--eg-font-serif);
+  --eg-font-sans:       var(--eg-font-sans);
 
   /* ── ABSTÄNDE ── */
   --eg-space-xs:        .5rem;
@@ -92,6 +122,17 @@ Text Domain:  eigengrund-child
      Hier Buttons dynamischer machen:
      z.B. translateY(-3px) für stärkeres Anheben */
   --eg-btn-hover-lift:  translateY(-1px);
+
+  /* ── KADENCE FARBPALETTE ── */
+  --global-palette1:    #D4956A;  /* Amber - Hauptakzent */
+  --global-palette2:    #8B4513;  /* Dunkelbraun - Links, Tags */
+  --global-palette3:    #1E1B14;  /* Fast-Schwarz - Haupttext */
+  --global-palette4:    #3A3428;  /* Dunkelbraun - Hover */
+  --global-palette5:    #6B6456;  /* Gedimmter Text */
+  --global-palette6:    #9A8E82;  /* Sehr gedimmter Text */
+  --global-palette7:    #F0E8D8;  /* Heller Abschnitt */
+  --global-palette8:    #F7F0E6;  /* Creme - Seitenhintergrund */
+  --global-palette9:    #FFFFFF;  /* Weiss - Karten */
   --eg-btn-shadow:      0 4px 14px rgba(212,149,106,.25);
 }
 
@@ -903,17 +944,6 @@ body.eg-dark .eg-btn--amber { color: #16120C; }
    Palette 1 = Amber (Akzent), Palette 3 = Dunkel (Text),
    Palette 8 = Creme (Hintergrund), Palette 9 = Weiß
    ── */
-:root {
-  --global-palette1:    #D4956A;  /* Amber – Hauptakzent */
-  --global-palette2:    #8B4513;  /* Dunkelbraun – Links, Tags */
-  --global-palette3:    #1E1B14;  /* Fast-Schwarz – Haupttext */
-  --global-palette4:    #3A3428;  /* Dunkelbraun – Hover */
-  --global-palette5:    #6B6456;  /* Gedimmter Text */
-  --global-palette6:    #9A8E82;  /* Sehr gedimmter Text */
-  --global-palette7:    #F0E8D8;  /* Heller Abschnitt */
-  --global-palette8:    #F7F0E6;  /* Creme – Seitenhintergrund */
-  --global-palette9:    #FFFFFF;  /* Weiß – Karten */
-}
 
 /* ── SEITENHINTERGRUND ── */
 body {
@@ -926,7 +956,7 @@ body,
 p,
 .entry-content p,
 .wp-block-paragraph {
-  font-family: 'Lato', sans-serif;
+  font-family: var(--eg-font-sans);
   font-weight: 400;
   font-size: 17px;
   line-height: 1.9;
@@ -938,7 +968,7 @@ h1, h2, h3, h4, h5, h6,
 .entry-title,
 .wp-block-heading,
 .kadence-advanced-heading {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--eg-font-serif);
   font-weight: 300;
   color: #1E1B14;
   line-height: 1.15;
@@ -994,7 +1024,7 @@ a:hover { color: #D4956A; }
 /* ── KADENCE SECTION / ROW BLÖCKE ── */
 .kt-row-column-wrap,
 .wp-block-kadence-rowlayout {
-  font-family: 'Lato', sans-serif;
+  font-family: var(--eg-font-sans);
 }
 
 /* ── KADENCE INFOBOX / KARTEN ── */
@@ -1023,7 +1053,7 @@ a:hover { color: #D4956A; }
 
 /* Absatz */
 .wp-block-paragraph {
-  font-family: 'Lato', sans-serif;
+  font-family: var(--eg-font-sans);
   font-size: 15px;
   line-height: 1.9;
   color: rgba(30,27,20,.82);
@@ -1034,14 +1064,14 @@ a:hover { color: #D4956A; }
 .wp-block-pullquote {
   border-left: 2px solid #D4956A !important;
   padding-left: 1.5rem !important;
-  font-family: 'Cormorant Garamond', serif !important;
+  font-family: var(--eg-font-serif) !important;
   font-style: italic !important;
   font-size: clamp(17px, 2.2vw, 21px) !important;
   color: rgba(30,27,20,.75) !important;
 }
 .wp-block-quote p,
 .wp-block-pullquote p {
-  font-family: 'Cormorant Garamond', serif !important;
+  font-family: var(--eg-font-serif) !important;
   font-style: italic !important;
   font-size: inherit !important;
   color: inherit !important;
@@ -1064,7 +1094,7 @@ a:hover { color: #D4956A; }
 .wp-block-list,
 ul.wp-block-list,
 ol.wp-block-list {
-  font-family: 'Lato', sans-serif;
+  font-family: var(--eg-font-sans);
   font-size: 15px;
   line-height: 1.85;
   color: rgba(30,27,20,.82);
@@ -1197,7 +1227,7 @@ h1, h2, h3, h4 {
 #colophon {
   border-top: .5px solid rgba(30,27,20,.1) !important;
   background: #F7F0E6 !important;
-  font-family: 'Lato', sans-serif !important;
+  font-family: var(--eg-font-sans) !important;
   font-size: 11px !important;
   color: rgba(30,27,20,.5) !important;
   font-weight: 300 !important;
@@ -1271,11 +1301,11 @@ body.eg-dark #colophon {
   letter-spacing: .1em;
   text-transform: uppercase;
   color: rgba(30,27,20,.50);
-  font-family: 'Lato', sans-serif;
+  font-family: var(--eg-font-sans);
 }
 /* Abschlusssatz */
 .eg-start-eb-section > div[style*="grid"] > div > div:nth-child(2) {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--eg-font-serif);
   font-style: italic;
   font-size: clamp(15px,1.8vw,17px);
   line-height: 1.6;
@@ -1436,4 +1466,296 @@ body.eg-dark #colophon {
 .eg-card--nav .eg-card__text {
   font-size: 13px;
   margin: 0;
+}
+/* ============================================================
+   22. EMOTIONSRAEUME
+   Plugin: eigengrund-emotionsraeume
+   Shortcode: [eg_emotionsraum slug="..."]
+   ============================================================ */
+
+/* ── RAUM-CONTAINER ── */
+.eg-raum {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 6rem;
+}
+
+/* ── RAUM-TITEL (H1) ── */
+.eg-raum-titel {
+  font-family: var(--eg-font-serif);
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--global-palette3);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+/* ── EINSTIEGSTEXT ── */
+.eg-raum-einstieg {
+  font-family: var(--eg-font-sans);
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--global-palette5);
+  margin-bottom: 2rem;
+}
+
+/* ── PHASENTRENNER (H2) ── */
+.eg-phasentrenner {
+  margin: 2.5rem 0 1.5rem;
+}
+.eg-phase-label {
+  font-family: var(--eg-font-serif);
+  font-size: clamp(24px, 3.5vw, 38px);
+  font-weight: 300;
+  color: var(--global-palette3);
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+.eg-phase-uebergang {
+  font-family: var(--eg-font-serif);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--global-palette5);
+  line-height: 1.85;
+  padding-left: 1.5rem;
+  border-left: 1px solid rgba(30,27,20,.1);
+  margin-bottom: 1.5rem;
+}
+
+/* ── EINHEIT-BOX (klappbar) ── */
+.eg-einheit {
+  border: 0.5px solid var(--eg-border);
+  border-radius: 2px;
+  margin-bottom: 6px;
+  background: var(--global-palette9);
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.eg-einheit.eg-gesperrt {
+  opacity: 0.45;
+  pointer-events: none;
+}
+.eg-einheit.eg-abgeschlossen {
+  background: rgba(30,27,20,.02);
+}
+.eg-einheit.eg-abgeschlossen .eg-einheit-header {
+  opacity: 0.6;
+}
+
+/* ── EINHEIT-HEADER (H3, klappbar) ── */
+.eg-einheit-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.9rem 1.25rem;
+  cursor: pointer;
+  transition: background 0.15s;
+  user-select: none;
+}
+.eg-einheit:not(.eg-gesperrt) .eg-einheit-header:hover {
+  background: var(--global-palette7);
+}
+.eg-einheit-nummer {
+  font-family: var(--eg-font-sans);
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--global-palette6);
+  min-width: 24px;
+  flex-shrink: 0;
+  letter-spacing: 0.05em;
+}
+.eg-einheit-frage {
+  font-family: var(--eg-font-serif);
+  font-size: clamp(18px, 2.2vw, 22px);
+  font-weight: 400;
+  color: var(--global-palette3);
+  line-height: 1.3;
+  flex: 1;
+}
+.eg-einheit-check {
+  font-size: 12px;
+  color: var(--global-palette1);
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+/* ── EINHEIT-INHALT ── */
+.eg-einheit-inhalt {
+  padding: 1.25rem 1.4rem 1.5rem;
+  border-top: 0.5px solid var(--eg-border);
+}
+
+/* ── IMPULS-TEXT (Body) ── */
+.eg-impuls-text {
+  font-family: var(--eg-font-sans);
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.9;
+  color: var(--global-palette5);
+  margin-bottom: 1.5rem;
+}
+.eg-impuls-text p { margin-bottom: 1rem; }
+.eg-impuls-text p:last-child { margin-bottom: 0; }
+
+/* ── EINGABE-FRAGE (Body + abgehoben) ── */
+.eg-eingabe-frage {
+  font-family: var(--eg-font-serif);
+  font-size: 15px;
+  font-style: italic;
+  color: var(--global-palette3);
+  line-height: 1.6;
+  padding: 0.75rem 1rem;
+  border-left: 2px solid var(--global-palette1);
+  background: rgba(212,149,106,.06);
+  border-radius: 0 2px 2px 0;
+  margin-bottom: 1rem;
+}
+
+/* ── TEXTAREA ── */
+.eg-textarea {
+  width: 100%;
+  font-family: var(--eg-font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--global-palette3);
+  background: var(--global-palette9);
+  border: 0.5px solid rgba(30,27,20,.18);
+  border-radius: 2px;
+  padding: 0.75rem 1rem;
+  resize: vertical;
+  min-height: 80px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.eg-textarea:focus {
+  border-color: var(--global-palette1);
+}
+.eg-textarea[readonly] {
+  background: rgba(30,27,20,.02);
+  color: var(--global-palette5);
+  cursor: default;
+}
+
+/* ── ABSCHLUSS-BUTTON ── */
+.eg-abschluss-btn {
+  display: inline-block;
+  margin-top: 0.75rem;
+  font-family: var(--eg-font-sans);
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--global-palette5);
+  background: none;
+  border: 0.5px solid rgba(30,27,20,.2);
+  border-radius: 2px;
+  padding: 0.55rem 1.1rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.eg-abschluss-btn:hover {
+  background: var(--global-palette7);
+  color: var(--global-palette3);
+}
+.eg-abschluss-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* ── BOGEN ── */
+.eg-bogen {
+  border: 0.5px solid var(--eg-border);
+  border-radius: 2px;
+  background: var(--global-palette9);
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+}
+.eg-bogen h3 {
+  font-family: var(--eg-font-serif);
+  font-size: clamp(18px, 2.2vw, 22px);
+  font-weight: 300;
+  color: var(--global-palette3);
+  margin-bottom: 0.5rem;
+}
+.eg-bogen p {
+  font-family: var(--eg-font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--global-palette5);
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+.eg-bogen-textarea {
+  width: 100%;
+  font-family: var(--eg-font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--global-palette3);
+  background: var(--global-palette9);
+  border: 0.5px solid rgba(30,27,20,.18);
+  border-radius: 2px;
+  padding: 0.75rem 1rem;
+  resize: vertical;
+  min-height: 100px;
+  outline: none;
+  margin-bottom: 0.75rem;
+  transition: border-color 0.2s;
+}
+.eg-bogen-textarea:focus {
+  border-color: var(--global-palette1);
+}
+.eg-bogen-btn {
+  font-family: var(--eg-font-sans);
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--global-palette9);
+  background: var(--global-palette3);
+  border: none;
+  border-radius: 2px;
+  padding: 0.65rem 1.4rem;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.eg-bogen-btn:hover { opacity: 0.85; }
+.eg-bogen-damals {
+  font-family: var(--eg-font-serif);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--global-palette5);
+  line-height: 1.75;
+  border-left: 2px solid var(--global-palette1);
+  padding-left: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* ── LOCKED-VIEW ── */
+.eg-raum-gesperrt .eg-locked-hinweis {
+  font-family: var(--eg-font-sans);
+  font-size: 13px;
+  color: var(--global-palette5);
+  margin-top: 1.5rem;
+}
+
+/* ── FEHLER-NOTICE ── */
+.eg-error-notice {
+  font-family: var(--eg-font-sans);
+  font-size: 13px;
+  color: #8B0000;
+  background: rgba(139,0,0,.06);
+  border: 0.5px solid rgba(139,0,0,.2);
+  border-radius: 2px;
+  padding: 0.6rem 1rem;
+  margin-top: 1rem;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 680px) {
+  .eg-raum { padding: 1.5rem 1rem 4rem; }
+  .eg-einheit-frage { font-size: 18px; }
+  .eg-phase-label { font-size: 22px; }
 }
