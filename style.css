@@ -100,8 +100,8 @@ Text Domain:  eigengrund-child
   --eg-modal-bg:        rgba(20,16,10,.58);
 
   /* ── SCHRIFTEN ── */
-  --eg-font-serif:      var(--eg-font-serif);
-  --eg-font-sans:       var(--eg-font-sans);
+  --eg-font-serif:      'Cormorant Garamond', serif;
+  --eg-font-sans:       'Lato', sans-serif;
 
   /* ── ABSTÄNDE ── */
   --eg-space-xs:        .5rem;
