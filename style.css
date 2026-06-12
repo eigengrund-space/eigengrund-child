@@ -1753,9 +1753,145 @@ body.eg-dark #colophon {
   margin-top: 1rem;
 }
 
+/* ── BOGEN-KATEGORIE ── */
+.eg-bogen-kategorie {
+  margin-bottom: 1.5rem;
+}
+.eg-bogen .eg-bogen-kategorie-label {
+  font-family: var(--eg-font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--global-palette5);
+  margin-bottom: 0.4rem;
+}
+.eg-bogen .eg-bogen-aspekte {
+  font-family: var(--eg-font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--global-palette6);
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+.eg-bogen-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* ── RÜCKBLICK – CONTAINER ── */
+.eg-rueckblick {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 6rem;
+}
+.eg-rueckblick-hinweis {
+  font-family: var(--eg-font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--global-palette5);
+  line-height: 1.8;
+}
+.eg-rueckblick-hook {
+  font-family: var(--eg-font-serif);
+  font-style: italic;
+  font-size: 16px;
+  color: var(--global-palette5);
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+/* ── RÜCKBLICK – AUFKLAPPBARE RÄUME (eingeloggter Modus) ── */
+.eg-rueckblick-raum {
+  border: 0.5px solid var(--eg-border);
+  border-radius: 2px;
+  margin-bottom: 6px;
+  background: var(--global-palette9);
+  overflow: hidden;
+}
+.eg-rueckblick-raum-header {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font-family: var(--eg-font-serif);
+  font-size: clamp(18px, 2.2vw, 22px);
+  font-weight: 300;
+  color: var(--global-palette3);
+  background: none;
+  border: none;
+  padding: 0.9rem 1.25rem;
+  cursor: pointer;
+  transition: background 0.15s;
+  user-select: none;
+}
+.eg-rueckblick-raum-header:hover {
+  background: var(--global-palette7);
+}
+.eg-rueckblick-raum-inhalt {
+  padding: 1.25rem 1.4rem 1.5rem;
+  border-top: 0.5px solid var(--eg-border);
+}
+
+/* ── VERGLEICH ── */
+.eg-vergleich-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+.eg-vergleich-spalte {
+  padding: 1.5rem;
+  border-radius: 2px;
+}
+.eg-vergleich-spalte:first-child {
+  background: var(--global-palette7);
+}
+.eg-vergleich-spalte:last-child {
+  background: var(--global-palette9);
+  border: 0.5px solid var(--eg-border);
+}
+.eg-vergleich-header {
+  font-family: var(--eg-font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--global-palette6);
+  margin-bottom: 1.5rem;
+}
+.eg-vergleich-kategorie {
+  margin-bottom: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 0.5px solid var(--eg-border);
+}
+.eg-vergleich-kategorie:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.eg-vergleich-kategorie-label {
+  font-family: var(--eg-font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--global-palette6);
+  margin-bottom: 0.35rem;
+}
+.eg-vergleich-kategorie-text {
+  font-family: var(--eg-font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--global-palette5);
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 680px) {
   .eg-raum { padding: 1.5rem 1rem 4rem; }
   .eg-einheit-frage { font-size: 18px; }
   .eg-phase-label { font-size: 22px; }
+  .eg-rueckblick { padding: 1.5rem 1rem 4rem; }
+  .eg-vergleich-grid {
+    grid-template-columns: 1fr;
+  }
 }
