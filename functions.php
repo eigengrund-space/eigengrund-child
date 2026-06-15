@@ -834,3 +834,6 @@ function eigengrund_article_schema() {
         . wp_json_encode( $schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES )
         . '</script>' . "\n";
 }
+
+// ── PMPRO COOKIES DEAKTIVIEREN ───────────────────────────────
+add_filter( 'pmpro_set_cookie', '__return_false' );
