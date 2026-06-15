@@ -227,7 +227,7 @@ function eg_start_erfahrungsberichte_sc() {
     ?>
     <section class="eg-start-eb-section">
         <?php if ( $q->have_posts() ) : ?>
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1px;background:rgba(30,27,20,.08);border-radius:2px;overflow:hidden;margin-bottom:2rem;">
+        <div class="eg-sc-eb-grid">
             <?php while ( $q->have_posts() ) : $q->the_post();
                 $vn = get_post_meta(get_the_ID(),'eb_vorname',true);
                 $al = get_post_meta(get_the_ID(),'eb_alter',true);
@@ -235,19 +235,19 @@ function eg_start_erfahrungsberichte_sc() {
                 $si = get_post_meta(get_the_ID(),'eb_sichtbar',true);
                 $gesperrt = ($si==='mitglieder' && !current_user_can('eg_mitglied')) || ($si==='angemeldet' && !is_user_logged_in());
             ?>
-            <div style="background:#fff;padding:1.5rem;display:flex;flex-direction:column;gap:.75rem;">
-                <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(30,27,20,.5);font-family:'Lato',sans-serif;font-weight:300;"><?php echo esc_html($vn.($al?' · '.$al:'')); ?></div>
-                <?php if($ab): ?><div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(15px,1.8vw,17px);line-height:1.6;color:rgba(30,27,20,.75);">&bdquo;<?php echo esc_html($ab); ?>&ldquo;</div><?php endif; ?>
+            <div class="eg-sc-eb-card">
+                <div class="eg-sc-eb-person"><?php echo esc_html($vn.($al?' · '.$al:'')); ?></div>
+                <?php if($ab): ?><div class="eg-sc-eb-quote">&bdquo;<?php echo esc_html($ab); ?>&ldquo;</div><?php endif; ?>
                 <?php if($gesperrt): ?>
-                <a href="<?php echo esc_url(home_url('/anmelden')); ?>" style="font-size:11px;color:#8B4513;text-decoration:none;letter-spacing:.08em;text-transform:uppercase;font-family:'Lato',sans-serif;margin-top:auto;">🔒 Kostenlos anmelden</a>
+                <a href="<?php echo esc_url(home_url('/anmelden')); ?>" class="eg-sc-eb-link">🔒 Kostenlos anmelden</a>
                 <?php else: ?>
-                <a href="<?php the_permalink(); ?>" style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#8B4513;text-decoration:none;margin-top:auto;font-family:'Lato',sans-serif;">Bericht lesen →</a>
+                <a href="<?php the_permalink(); ?>" class="eg-sc-eb-link">Bericht lesen →</a>
                 <?php endif; ?>
             </div>
             <?php endwhile; wp_reset_postdata(); ?>
         </div>
         <?php else : ?>
-        <p style="color:rgba(30,27,20,.55);font-style:italic;">Noch keine Berichte vorhanden.</p>
+        <p class="eg-sc-eb-empty">Noch keine Berichte vorhanden.</p>
         <?php endif; ?>
     </section>
     <?php
@@ -258,14 +258,14 @@ function eg_start_erfahrungsberichte_sc() {
 add_shortcode( 'eg_start_cta_einreichen', 'eg_start_cta_einreichen_sc' );
 function eg_start_cta_einreichen_sc() {
     ob_start(); ?>
-    <section style="padding:4rem 2.5rem;background:#F0E8D8;">
-        <div style="max-width:680px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:2rem;">
+    <section class="eg-sc-cta">
+        <div class="eg-sc-cta-inner">
             <div>
-                <div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8B4513;margin-bottom:.75rem;font-family:'Lato',sans-serif;">Mitmachen</div>
-                <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(20px,3vw,30px);color:#1E1B14;margin-bottom:.75rem;">Dein Prozess &ndash; <em style="color:#8B4513;">in deinen Worten.</em></h2>
-                <p style="font-size:14px;line-height:1.75;color:rgba(30,27,20,.75);font-family:'Lato',sans-serif;font-weight:300;max-width:420px;">Kein perfekter Text, keine Auflösung nötig. Nur deine ehrliche Beschreibung &ndash; für andere, die vielleicht gerade dort sind, wo du warst.</p>
+                <div class="eg-sc-cta-label">Mitmachen</div>
+                <h2 class="eg-sc-cta-h2">Dein Prozess &ndash; <em>in deinen Worten.</em></h2>
+                <p class="eg-sc-cta-body">Kein perfekter Text, keine Auflösung nötig. Nur deine ehrliche Beschreibung &ndash; für andere, die vielleicht gerade dort sind, wo du warst.</p>
             </div>
-            <a href="<?php echo esc_url(home_url('/einreichen')); ?>" style="display:inline-block;font-family:'Lato',sans-serif;font-weight:400;font-size:12px;letter-spacing:.08em;text-transform:uppercase;background:#1E1B14;color:#F7F0E6;padding:.85rem 2rem;border-radius:2px;text-decoration:none;white-space:nowrap;flex-shrink:0;">Bericht einreichen</a>
+            <a href="<?php echo esc_url(home_url('/einreichen')); ?>" class="eg-btn eg-btn--primary">Bericht einreichen</a>
         </div>
     </section>
     <?php
@@ -276,21 +276,20 @@ function eg_start_cta_einreichen_sc() {
 add_shortcode( 'eg_start_mitglieder_teaser', 'eg_start_mitglieder_teaser_sc' );
 function eg_start_mitglieder_teaser_sc() {
     ob_start(); ?>
-    <section style="padding:4.5rem 2.5rem;background:#F7F0E6;">
-        <div style="max-width:560px;">
-            <div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8B4513;margin-bottom:1rem;font-family:'Lato',sans-serif;">Intim</div>
-            <div style="width:32px;height:.5px;background:#D4956A;margin-bottom:1.5rem;"></div>
-            <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(22px,3.5vw,36px);color:#1E1B14;margin-bottom:1.25rem;">Ein persönlicher Raum &ndash;<br><em style="color:#8B4513;">in deinem eigenen Tempo.</em></h2>
-            <p style="font-size:15px;line-height:1.9;color:rgba(30,27,20,.82);margin-bottom:2rem;font-family:'Lato',sans-serif;font-weight:300;">Ein Bereich für Menschen, die sich weiter begleiten möchten &ndash; mit Werkzeugen zur Selbstreflexion, ohne dass jemand mitliest. Er entsteht gerade.</p>
-            <div style="background:rgba(212,149,106,.08);border:.5px solid rgba(139,69,19,.2);border-radius:2px;padding:1.5rem;">
-                <div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8B4513;margin-bottom:.75rem;font-family:'Lato',sans-serif;">Benachrichtigung wenn er startet</div>
-                <div style="display:flex;max-width:380px;" id="egMtNlRow">
-                    <input type="email" id="egMtNlEmail" placeholder="deine@email.de"
-                        style="flex:1;font-family:'Lato',sans-serif;font-size:13px;padding:.75rem 1rem;border:.5px solid rgba(30,27,20,.22);border-right:none;border-radius:2px 0 0 2px;background:#fff;color:#1E1B14;outline:none;">
-                    <button onclick="egMtNlSubmit()" style="font-family:'Lato',sans-serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase;background:#1E1B14;color:#F7F0E6;border:none;padding:.75rem 1.25rem;border-radius:0 2px 2px 0;cursor:pointer;white-space:nowrap;">Informiert werden</button>
+    <section class="eg-sc-mt">
+        <div class="eg-sc-mt-inner">
+            <div class="eg-sc-mt-label">Intim</div>
+            <div class="eg-rule"></div>
+            <h2 class="eg-sc-mt-h2">Ein persönlicher Raum &ndash;<br><em>in deinem eigenen Tempo.</em></h2>
+            <p class="eg-sc-mt-body">Ein Bereich für Menschen, die sich weiter begleiten möchten &ndash; mit Werkzeugen zur Selbstreflexion, ohne dass jemand mitliest. Er entsteht gerade.</p>
+            <div class="eg-nl-box">
+                <div class="eg-nl-label">Benachrichtigung wenn er startet</div>
+                <div class="eg-nl-row" id="egMtNlRow">
+                    <input type="email" id="egMtNlEmail" class="eg-nl-input" placeholder="deine@email.de">
+                    <button onclick="egMtNlSubmit()" class="eg-nl-btn">Informiert werden</button>
                 </div>
-                <div id="egMtNlOk" style="display:none;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:rgba(30,27,20,.85);padding:.5rem 0;">Gut. Wir melden uns &ndash; wenn es soweit ist.</div>
-                <p style="font-size:11px;color:rgba(30,27,20,.55);margin-top:.6rem;font-family:'Lato',sans-serif;">Einmalig. Kein Newsletter.</p>
+                <div id="egMtNlOk" class="eg-nl-ok" style="display:none;">Gut. Wir melden uns &ndash; wenn es soweit ist.</div>
+                <p class="eg-nl-note">Einmalig. Kein Newsletter.</p>
             </div>
         </div>
     </section>
@@ -298,7 +297,7 @@ function eg_start_mitglieder_teaser_sc() {
     async function egMtNlSubmit(){
         var email=document.getElementById('egMtNlEmail').value.trim();
         if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
-            document.getElementById('egMtNlEmail').style.borderColor='rgba(107,58,31,0.6)'; return;
+            document.getElementById('egMtNlEmail').classList.add('eg-input--error'); return;
         }
         try{
             var res=await fetch('<?php echo esc_url(home_url('/')); ?>brevo-proxy.php',{
@@ -325,16 +324,13 @@ function eg_start_mitglieder_teaser_sc() {
 add_shortcode( 'eg_start_prozess_ausblick', 'eg_start_prozess_ausblick_sc' );
 function eg_start_prozess_ausblick_sc() {
     ob_start(); ?>
-    <section style="padding:4rem 2.5rem;background:#F0E8D8;">
-        <div style="max-width:560px;background:#fff;border:.5px solid rgba(30,27,20,.10);border-radius:2px;padding:2rem 2.25rem;transition:background .2s ease,border-color .2s ease;"
-             onmouseover="this.style.background='rgba(30,27,20,.025)';this.style.borderColor='rgba(30,27,20,.18)'"
-             onmouseout="this.style.background='#fff';this.style.borderColor='rgba(30,27,20,.10)'">
-            <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(22px,3vw,34px);color:#1E1B14;margin:0 0 .9rem;">Orientierung im Prozess</h2>
-            <div style="width:32px;height:.5px;background:#D4956A;margin-bottom:1.5rem;"></div>
-            <p style="font-size:15px;line-height:1.9;color:rgba(30,27,20,.82);margin:0 0 1.75rem;font-family:'Lato',sans-serif;font-weight:300;">Was passiert eigentlich &ndash; und wie geht das? Fragen die im Prozess auftauchen, ehrlich beantwortet.</p>
-            <a href="<?php echo esc_url( home_url( '/prozess/' ) ); ?>"
-               style="display:inline-flex;align-items:center;gap:.45rem;font-family:'Lato',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#8B4513;text-decoration:none;">
-                Alle Seiten entdecken <span style="color:#D4956A;font-size:13px;">&rarr;</span>
+    <section class="eg-sc-pa">
+        <div class="eg-sc-pa-card">
+            <h2 class="eg-sc-pa-h2">Orientierung im Prozess</h2>
+            <div class="eg-rule"></div>
+            <p class="eg-sc-pa-body">Was passiert eigentlich &ndash; und wie geht das? Fragen die im Prozess auftauchen, ehrlich beantwortet.</p>
+            <a href="<?php echo esc_url( home_url( '/prozess/' ) ); ?>" class="eg-sc-pa-link">
+                Alle Seiten entdecken <span class="eg-sc-pa-arrow">&rarr;</span>
             </a>
         </div>
     </section>
@@ -348,60 +344,37 @@ function eg_start_prozess_ausblick_sc() {
 add_shortcode( 'eigengrund_anmelden', 'eigengrund_anmelden_shortcode' );
 function eigengrund_anmelden_shortcode() {
     ob_start(); ?>
-    <style>
-    .ega-wrap{max-width:600px;margin:0 auto;padding:3rem 0 5rem;}
-    .ega-tag{display:inline-block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8B4513;border:.5px solid rgba(139,69,19,.25);padding:.28rem .7rem;border-radius:2px;margin-bottom:1.5rem;font-family:'Lato',sans-serif;font-weight:300;}
-    .ega-h1{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(28px,4vw,46px);line-height:1.15;color:#1E1B14;margin-bottom:1.25rem;}
-    .ega-h1 em{font-style:italic;color:#8B4513;}
-    .ega-rule{width:32px;height:.5px;background:#D4956A;margin-bottom:1.5rem;}
-    .ega-lead{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(16px,2vw,20px);line-height:1.7;color:rgba(30,27,20,.75);margin-bottom:2rem;}
-    .ega-body{font-size:15px;line-height:1.9;color:rgba(30,27,20,.82);margin-bottom:2.5rem;font-family:'Lato',sans-serif;font-weight:300;}
-    .ega-features{list-style:none;padding:0;margin:0 0 2.5rem;}
-    .ega-features li{display:flex;gap:.75rem;font-size:14px;line-height:1.7;color:rgba(30,27,20,.82);padding:.5rem 0;border-bottom:.5px solid rgba(30,27,20,.07);font-family:'Lato',sans-serif;}
-    .ega-features li:last-child{border-bottom:none;}
-    .ega-features li::before{content:'→';color:#D4956A;flex-shrink:0;}
-    .ega-newsletter{background:rgba(212,149,106,.08);border:.5px solid rgba(139,69,19,.2);border-radius:2px;padding:1.75rem;margin-bottom:2rem;}
-    .ega-newsletter-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8B4513;margin-bottom:.75rem;font-family:'Lato',sans-serif;}
-    .ega-newsletter-title{font-family:'Cormorant Garamond',serif;font-size:clamp(17px,2.2vw,22px);color:#1E1B14;margin-bottom:.5rem;}
-    .ega-newsletter-row{display:flex;max-width:420px;}
-    .ega-newsletter-input{flex:1;font-family:'Lato',sans-serif;font-size:14px;font-weight:300;padding:.8rem 1rem;border:.5px solid rgba(30,27,20,.22);border-right:none;border-radius:2px 0 0 2px;background:#fff;color:#1E1B14;outline:none;}
-    .ega-newsletter-btn{font-family:'Lato',sans-serif;font-weight:400;font-size:12px;letter-spacing:.08em;text-transform:uppercase;background:#1E1B14;color:#F7F0E6;border:none;padding:.8rem 1.5rem;border-radius:0 2px 2px 0;cursor:pointer;white-space:nowrap;}
-    .ega-newsletter-success{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:rgba(30,27,20,.85);padding:.5rem 0;display:none;}
-    .ega-disc{font-size:12px;color:rgba(30,27,20,.55);line-height:1.75;font-family:'Lato',sans-serif;}
-    .ega-back{display:inline-block;margin-top:2.5rem;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#8B4513;text-decoration:none;font-family:'Lato',sans-serif;}
-    </style>
-
-    <div class="ega-wrap">
-        <div class="ega-tag">Mitgliederbereich</div>
-        <h1 class="ega-h1">Dieser Inhalt ist<br>nur f&uuml;r <em>Mitglieder.</em></h1>
-        <div class="ega-rule"></div>
-        <p class="ega-lead">Der Mitgliederbereich von eigengrund.space befindet sich gerade im Aufbau und wird in K&uuml;rze starten.</p>
-        <p class="ega-body">Wer Mitglied wird, bekommt Zugang zu Werkzeugen f&uuml;r die eigene Selbstreflexion &ndash; Traum-Tracker, Prozess-Tagebuch, Lebensrad und mehr. In deinem eigenen Tempo. Ohne dass jemand mitliest.</p>
-        <ul class="ega-features">
+    <div class="eg-sc-anmelden-wrap">
+        <div class="eg-tag">Mitgliederbereich</div>
+        <h1 class="eg-sc-anmelden-h1">Dieser Inhalt ist<br>nur f&uuml;r <em>Mitglieder.</em></h1>
+        <div class="eg-rule"></div>
+        <p class="eg-lead">Der Mitgliederbereich von eigengrund.space befindet sich gerade im Aufbau und wird in K&uuml;rze starten.</p>
+        <p class="eg-body">Wer Mitglied wird, bekommt Zugang zu Werkzeugen f&uuml;r die eigene Selbstreflexion &ndash; Traum-Tracker, Prozess-Tagebuch, Lebensrad und mehr. In deinem eigenen Tempo. Ohne dass jemand mitliest.</p>
+        <ul class="eg-sc-features">
             <li>Traum-Tracker &ndash; Eintr&auml;ge, Tags, pers&ouml;nliche Mustererkennung</li>
             <li>Prozess-Tagebuch &ndash; freies Journal, vollst&auml;ndig privat</li>
             <li>Lebensrad &ndash; Lebensbereiche einsch&auml;tzen und &uuml;ber Zeit vergleichen</li>
             <li>Brief an dich selbst &ndash; wird in 6 oder 12 Monaten zugestellt</li>
             <li>Alle Erfahrungsberichte &ndash; auch die nur f&uuml;r Mitglieder freigegebenen</li>
         </ul>
-        <div class="ega-newsletter">
-            <div class="ega-newsletter-label">Benachrichtigung</div>
-            <div class="ega-newsletter-title">Informiert werden wenn der Mitgliederbereich startet</div>
-            <div class="ega-newsletter-row" id="agaFormRow">
-                <input class="ega-newsletter-input" type="email" id="agaEmail" placeholder="deine@email.de" autocomplete="email">
-                <button class="ega-newsletter-btn" onclick="agaSubmit()">Informiert werden</button>
+        <div class="eg-nl-box">
+            <div class="eg-nl-label">Benachrichtigung</div>
+            <div class="eg-nl-titel">Informiert werden wenn der Mitgliederbereich startet</div>
+            <div class="eg-nl-row" id="agaFormRow">
+                <input class="eg-nl-input" type="email" id="agaEmail" placeholder="deine@email.de" autocomplete="email">
+                <button class="eg-nl-btn" onclick="agaSubmit()">Informiert werden</button>
             </div>
-            <div class="ega-newsletter-success" id="agaSuccess">Gut. Wir melden uns &ndash; wenn es soweit ist.</div>
+            <div class="eg-nl-ok" id="agaSuccess" style="display:none;">Gut. Wir melden uns &ndash; wenn es soweit ist.</div>
         </div>
-        <p class="ega-disc">Keine weiteren E-Mails. Kein Tracking. Deine Adresse wird ausschlie&szlig;lich f&uuml;r diese eine Benachrichtigung verwendet.</p>
-        <a href="<?php echo esc_url( home_url('/') ); ?>" class="ega-back">&larr; Zur&uuml;ck zur Startseite</a>
+        <p class="eg-small">Keine weiteren E-Mails. Kein Tracking. Deine Adresse wird ausschlie&szlig;lich f&uuml;r diese eine Benachrichtigung verwendet.</p>
+        <a href="<?php echo esc_url( home_url('/') ); ?>" class="eg-sc-back">&larr; Zur&uuml;ck zur Startseite</a>
     </div>
 
     <script>
     async function agaSubmit() {
         var email = document.getElementById('agaEmail').value.trim();
         if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
-            document.getElementById('agaEmail').style.borderColor='rgba(107,58,31,0.6)'; return;
+            document.getElementById('agaEmail').classList.add('eg-input--error'); return;
         }
         try{
             var res=await fetch('<?php echo esc_url(home_url("/")); ?>brevo-proxy.php',{
@@ -463,30 +436,11 @@ function eg_newsletter_box_shortcode( $atts ) {
         <p class="eg-nl-note"><?php echo esc_html( $atts['note'] ); ?></p>
     </div>
 
-    <style>
-    .eg-nl-box{background:rgba(212,149,106,.08);border:.5px solid rgba(139,69,19,.2);border-radius:2px;padding:1.5rem 1.75rem;}
-    .eg-nl-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8B4513;margin-bottom:.6rem;font-family:'Lato',sans-serif;}
-    .eg-nl-titel{font-family:'Cormorant Garamond',serif;font-size:clamp(17px,2.2vw,22px);color:#1E1B14;margin-bottom:1rem;line-height:1.3;}
-    .eg-nl-row{display:flex;max-width:420px;}
-    .eg-nl-input{flex:1;font-family:'Lato',sans-serif;font-size:14px;padding:.75rem 1rem;border:.5px solid rgba(30,27,20,.22);border-right:none;border-radius:2px 0 0 2px;background:#fff;color:#1E1B14;outline:none;transition:border-color .2s;}
-    .eg-nl-input:focus{border-color:#D4956A;}
-    .eg-nl-input::placeholder{color:rgba(30,27,20,.4);}
-    .eg-nl-btn{font-family:'Lato',sans-serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase;background:#1E1B14;color:#F7F0E6;border:none;padding:.75rem 1.25rem;border-radius:0 2px 2px 0;cursor:pointer;white-space:nowrap;transition:background .2s;}
-    .eg-nl-btn:hover{background:#3A3428;}
-    .eg-nl-ok{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:rgba(30,27,20,.85);padding:.4rem 0;}
-    .eg-nl-note{font-size:11px;color:rgba(30,27,20,.55);margin-top:.6rem;font-family:'Lato',sans-serif;}
-    @media(max-width:560px){
-        .eg-nl-row{flex-direction:column;}
-        .eg-nl-input{border-right:.5px solid rgba(30,27,20,.22);border-bottom:none;border-radius:2px 2px 0 0;}
-        .eg-nl-btn{border-radius:0 0 2px 2px;text-align:center;}
-    }
-    </style>
-
     <script>
     function egNlSubmit(uid) {
         var email = document.getElementById(uid+'Email').value.trim();
         if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
-            document.getElementById(uid+'Email').style.borderColor='rgba(107,58,31,0.6)';
+            document.getElementById(uid+'Email').classList.add('eg-input--error');
             return;
         }
         fetch('<?php echo esc_url( home_url('/') ); ?>brevo-proxy.php', {
@@ -532,12 +486,6 @@ add_action( 'init', function() {
   <li>Vierter Punkt – Beschreibung hier</li>
   <li>Fünfter Punkt – Beschreibung hier</li>
 </ul>
-<style>
-.eg-pfeil-liste{list-style:none;padding:0;margin:0;}
-.eg-pfeil-liste li{display:flex;gap:.75rem;font-size:14px;line-height:1.75;color:rgba(30,27,20,.82);padding:.55rem 0;border-bottom:.5px solid rgba(30,27,20,.07);font-family:"Lato",sans-serif;font-weight:300;}
-.eg-pfeil-liste li:last-child{border-bottom:none;}
-.eg-pfeil-liste li::before{content:"→";color:#D4956A;flex-shrink:0;margin-top:.05em;}
-</style>
 <!-- /wp:html -->',
     ) );
 } );
