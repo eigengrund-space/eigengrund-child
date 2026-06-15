@@ -987,7 +987,7 @@ h4 { font-size: clamp(17px, 2vw, 22px); }
 h1 em, h2 em, h3 em,
 .wp-block-heading em {
   font-style: italic;
-  color: #4A4038;
+  color: var(--eg-amber);
 }
 
 /* ── LINKS ── */
