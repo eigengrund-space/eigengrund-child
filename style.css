@@ -212,7 +212,7 @@ body {
   color: var(--eg-text);
   transition: color var(--eg-transition-slow);
 }
-.eg-h1 em { font-style: italic; color: var(--eg-accent); }
+.eg-h1 em { font-style: italic; color: var(--eg-amber); }
 
 .eg-h2 {
   font-family: var(--eg-font-serif);
@@ -222,7 +222,7 @@ body {
   color: var(--eg-text);
   transition: color var(--eg-transition-slow);
 }
-.eg-h2 em { font-style: italic; color: var(--eg-accent); }
+.eg-h2 em { font-style: italic; color: var(--eg-amber); }
 
 .eg-h3 {
   font-family: var(--eg-font-serif);
