@@ -9,7 +9,7 @@
 add_action( 'wp_enqueue_scripts', 'eigengrund_enqueue' );
 function eigengrund_enqueue() {
     wp_enqueue_style( 'eigengrund-fonts',
-        'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Lato:wght@300;400&display=swap',
+        'https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;1,300&family=Inter:wght@400;500&display=swap',
         array(), null );
     wp_enqueue_style( 'kadence-style',
         get_template_directory_uri() . '/style.css',
@@ -25,7 +25,7 @@ function eigengrund_enqueue() {
 add_action( 'enqueue_block_editor_assets', 'eigengrund_editor_fonts' );
 function eigengrund_editor_fonts() {
     wp_enqueue_style( 'eigengrund-fonts-editor',
-        'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Lato:wght@300;400&display=swap',
+        'https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;1,300&family=Inter:wght@400;500&display=swap',
         array(), null );
 }
 
@@ -35,20 +35,20 @@ function eigengrund_editor_fonts() {
 add_filter( 'kadence_theme_options_defaults', 'eigengrund_kadence_defaults' );
 function eigengrund_kadence_defaults( $defaults ) {
     $defaults['palette'] = json_encode( array(
-        array( 'color' => '#D4956A', 'slug' => 'palette1', 'name' => 'Amber' ),
-        array( 'color' => '#8B4513', 'slug' => 'palette2', 'name' => 'Dunkelbraun' ),
-        array( 'color' => '#1E1B14', 'slug' => 'palette3', 'name' => 'Fast-Schwarz' ),
+        array( 'color' => '#A85D42', 'slug' => 'palette1', 'name' => 'Amber' ),
+        array( 'color' => '#4A4038', 'slug' => 'palette2', 'name' => 'Dunkelbraun' ),
+        array( 'color' => '#1C1B19', 'slug' => 'palette3', 'name' => 'Fast-Schwarz' ),
         array( 'color' => '#3A3428', 'slug' => 'palette4', 'name' => 'Dunkelbraun Hover' ),
         array( 'color' => '#6B6456', 'slug' => 'palette5', 'name' => 'Text gedimmt' ),
         array( 'color' => '#9A8E82', 'slug' => 'palette6', 'name' => 'Text faint' ),
         array( 'color' => '#F0E8D8', 'slug' => 'palette7', 'name' => 'Creme hell' ),
-        array( 'color' => '#F7F0E6', 'slug' => 'palette8', 'name' => 'Creme' ),
+        array( 'color' => '#F2F0EB', 'slug' => 'palette8', 'name' => 'Creme' ),
         array( 'color' => '#FFFFFF', 'slug' => 'palette9', 'name' => 'Weiß' ),
     ) );
-    $defaults['background_color']         = '#F7F0E6';
+    $defaults['background_color']         = '#F2F0EB';
     $defaults['content_background_color'] = '#FFFFFF';
-    $defaults['link_color']               = '#8B4513';
-    $defaults['link_color_hover']         = '#D4956A';
+    $defaults['link_color']               = '#4A4038';
+    $defaults['link_color_hover']         = '#A85D42';
     return $defaults;
 }
 
@@ -61,10 +61,10 @@ function eigengrund_setup() {
     add_theme_support( 'title-tag' );
     add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption' ) );
     add_theme_support( 'editor-color-palette', array(
-        array( 'name' => 'Amber',       'slug' => 'eg-amber',   'color' => '#D4956A' ),
-        array( 'name' => 'Dunkelbraun', 'slug' => 'eg-dark',    'color' => '#8B4513' ),
-        array( 'name' => 'Fast-Schwarz','slug' => 'eg-black',   'color' => '#1E1B14' ),
-        array( 'name' => 'Creme',       'slug' => 'eg-creme',   'color' => '#F7F0E6' ),
+        array( 'name' => 'Amber',       'slug' => 'eg-amber',   'color' => '#A85D42' ),
+        array( 'name' => 'Dunkelbraun', 'slug' => 'eg-dark',    'color' => '#4A4038' ),
+        array( 'name' => 'Fast-Schwarz','slug' => 'eg-black',   'color' => '#1C1B19' ),
+        array( 'name' => 'Creme',       'slug' => 'eg-creme',   'color' => '#F2F0EB' ),
         array( 'name' => 'Creme hell',  'slug' => 'eg-creme-l', 'color' => '#F0E8D8' ),
         array( 'name' => 'Weiß',        'slug' => 'eg-white',   'color' => '#FFFFFF' ),
     ) );
@@ -78,7 +78,7 @@ function eigengrund_setup() {
 add_action( 'after_setup_theme', 'eigengrund_editor_styles' );
 function eigengrund_editor_styles() {
     add_editor_style( array(
-        'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Lato:wght@300;400&display=swap',
+        'https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;1,300&family=Inter:wght@400;500&display=swap',
         get_stylesheet_directory_uri() . '/style.css',
     ) );
 }
@@ -506,8 +506,8 @@ add_action( 'init', function() {
 add_action( 'wp_head', 'eigengrund_font_preload', 1 );
 function eigengrund_font_preload() {
     $fonts = array(
-        'https://fonts.gstatic.com/s/cormorantgaramond/v22/BXRlvF3Pi-DLmw0iBFJQCdsAKPM-gCzBtl2I.woff2',
-        'https://fonts.gstatic.com/s/lato/v24/S6uyw4BMUTPHjxAwXjeu.woff2',
+        'https://fonts.gstatic.com/s/newsreader/v26/cY9kfjOCX1hbuyalUrK439vogqC9yFZCYg7oRZaLP4obnf7fTXglsMx2T9ZHFjQ.woff2',
+        'https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2',
     );
     foreach ( $fonts as $url ) {
         echo '<link rel="preload" href="' . esc_url( $url ) . '" as="font" type="font/woff2" crossorigin="anonymous">' . "\n";

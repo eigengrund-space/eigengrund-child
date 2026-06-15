@@ -49,7 +49,7 @@ Text Domain:  eigengrund-child
 :root {
 
   /* ── FARBEN: TAG-MODUS ── */
-  --eg-bg:              #F7F0E6;   /* Seitenhintergrund warm Creme */
+  --eg-bg:              #F2F0EB;   /* Seitenhintergrund warm Creme */
   --eg-bg-card:         #FDF9F5;   /* Karten */
   --eg-bg-input:        #FFFFFF;   /* Eingabefelder */
   --eg-bg-hint:         rgba(212,149,106,.09);  /* Hinweis-Boxen */
@@ -59,50 +59,50 @@ Text Domain:  eigengrund-child
   --eg-bg-section:      #F0E8D8;   /* Abschnitt-Hintergrund */
 
   /* ── TEXT ── */
-  --eg-text:            #1E1B14;   /* Haupttext */
+  --eg-text:            #1C1B19;   /* Haupttext */
   --eg-text-muted:      rgba(30,27,20,.82);   /* Fließtext, Labels */
   --eg-text-faint:      rgba(30,27,20,.75);   /* Sublabels, Hinweise */
 
   /* ── AKZENTFARBEN ── */
-  --eg-accent:          #8B4513;   /* Dunkel-Braun: Links, Tags, Akzente */
-  --eg-amber:           #D4956A;   /* Amber: Buttons, Hover, Regeln */
+  --eg-accent:          #4A4038;   /* Dunkel-Braun: Links, Tags, Akzente */
+  --eg-amber:           #A85D42;   /* Amber: Buttons, Hover, Regeln */
   --eg-amber-hover:     #C17050;   /* Amber dunkler: Hover-Zustand */
 
   /* ── RAHMEN ── */
   --eg-border:          rgba(30,27,20,.10);   /* Sehr dezent */
   --eg-border-mid:      rgba(30,27,20,.20);   /* Mittel */
   --eg-border-input:    rgba(30,27,20,.22);   /* Eingabefelder */
-  --eg-border-focus:    #D4956A;              /* Fokus-Ring: Amber */
+  --eg-border-focus:    #A85D42;              /* Fokus-Ring: Amber */
 
   /* ── BUTTONS ── */
-  --eg-btn-bg:          #1E1B14;   /* Primär-Button Hintergrund */
-  --eg-btn-txt:         #F7F0E6;   /* Primär-Button Text */
+  --eg-btn-bg:          #1C1B19;   /* Primär-Button Hintergrund */
+  --eg-btn-txt:         #F2F0EB;   /* Primär-Button Text */
   --eg-btn-ghost-bg:    transparent;
-  --eg-btn-ghost-txt:   #1E1B14;
+  --eg-btn-ghost-txt:   #1C1B19;
 
   /* ── NAVIGATION ── */
   --eg-nav-bg:          rgba(247,240,230,.96);
   --eg-nav-height:      64px;
 
   /* ── TAGS & BADGES ── */
-  --eg-tag-c:           #8B4513;
+  --eg-tag-c:           #4A4038;
   --eg-tag-b:           rgba(139,69,19,.25);
   --eg-badge-member-bg: rgba(212,149,106,.15);
-  --eg-badge-member-c:  #8B4513;
+  --eg-badge-member-c:  #4A4038;
   --eg-badge-premium-bg:rgba(139,69,19,.12);
-  --eg-badge-premium-c: #8B4513;
+  --eg-badge-premium-c: #4A4038;
 
   /* ── FORMULAR-ELEMENTE ── */
   --eg-step-bg:         rgba(212,149,106,.18);
-  --eg-step-c:          #8B4513;
-  --eg-rule:            #D4956A;
+  --eg-step-c:          #4A4038;
+  --eg-rule:            #A85D42;
 
   /* ── MODAL ── */
   --eg-modal-bg:        rgba(20,16,10,.58);
 
   /* ── SCHRIFTEN ── */
-  --eg-font-serif:      'Cormorant Garamond', serif;
-  --eg-font-sans:       'Lato', sans-serif;
+  --eg-font-serif:      'Newsreader', serif;
+  --eg-font-sans:       'Inter', sans-serif;
 
   /* ── ABSTÄNDE ── */
   --eg-space-xs:        .5rem;
@@ -125,14 +125,14 @@ Text Domain:  eigengrund-child
   --eg-btn-hover-lift:  translateY(-1px);
 
   /* ── KADENCE FARBPALETTE ── */
-  --global-palette1:    #D4956A;  /* Amber - Hauptakzent */
-  --global-palette2:    #8B4513;  /* Dunkelbraun - Links, Tags */
-  --global-palette3:    #1E1B14;  /* Fast-Schwarz - Haupttext */
+  --global-palette1:    #A85D42;  /* Amber - Hauptakzent */
+  --global-palette2:    #4A4038;  /* Dunkelbraun - Links, Tags */
+  --global-palette3:    #1C1B19;  /* Fast-Schwarz - Haupttext */
   --global-palette4:    #3A3428;  /* Dunkelbraun - Hover */
   --global-palette5:    #6B6456;  /* Gedimmter Text */
   --global-palette6:    #9A8E82;  /* Sehr gedimmter Text */
   --global-palette7:    #F0E8D8;  /* Heller Abschnitt */
-  --global-palette8:    #F7F0E6;  /* Creme - Seitenhintergrund */
+  --global-palette8:    #F2F0EB;  /* Creme - Seitenhintergrund */
   --global-palette9:    #FFFFFF;  /* Weiss - Karten */
   --eg-btn-shadow:      0 4px 14px rgba(212,149,106,.25);
 }
@@ -948,8 +948,8 @@ body.eg-dark .eg-btn--amber { color: #16120C; }
 
 /* ── SEITENHINTERGRUND ── */
 body {
-  background-color: #F7F0E6;
-  color: #1E1B14;
+  background-color: #F2F0EB;
+  color: #1C1B19;
 }
 
 /* ── TYPOGRAFIE: BASIS-SCHRIFT ── */
@@ -971,7 +971,7 @@ h1, h2, h3, h4, h5, h6,
 .kadence-advanced-heading {
   font-family: var(--eg-font-serif);
   font-weight: 300;
-  color: #1E1B14;
+  color: #1C1B19;
   line-height: 1.15;
 }
 
@@ -987,27 +987,27 @@ h4 { font-size: clamp(17px, 2vw, 22px); }
 h1 em, h2 em, h3 em,
 .wp-block-heading em {
   font-style: italic;
-  color: #8B4513;
+  color: #4A4038;
 }
 
 /* ── LINKS ── */
 a {
-  color: #8B4513;
+  color: #4A4038;
   text-decoration: none;
   transition: color .2s;
 }
-a:hover { color: #D4956A; }
+a:hover { color: #A85D42; }
 
 /* ── BUTTONS ── */
 /* Buttons: Basis via Customizer → Zusätzliches CSS */
 /* Varianten die im Customizer nicht abgedeckt sind: */
 .wp-block-button.is-style-amber .wp-block-button__link {
-  background: #D4956A !important;
-  color: #1E1B14 !important;
+  background: #A85D42 !important;
+  color: #1C1B19 !important;
 }
 .wp-block-button.is-style-outline .wp-block-button__link {
   background: transparent !important;
-  color: #1E1B14 !important;
+  color: #1C1B19 !important;
   border: .5px solid rgba(30,27,20,.2) !important;
 }
 
@@ -1044,7 +1044,7 @@ a:hover { color: #D4956A; }
 /* ── KADENCE DIVIDER / TRENNLINIE ── */
 .kt-divider,
 .wp-block-kadence-spacer hr {
-  border-color: #D4956A !important;
+  border-color: #A85D42 !important;
   opacity: 1 !important;
 }
 
@@ -1063,7 +1063,7 @@ a:hover { color: #D4956A; }
 /* Zitat / Pull-Quote */
 .wp-block-quote,
 .wp-block-pullquote {
-  border-left: 2px solid #D4956A !important;
+  border-left: 2px solid #A85D42 !important;
   padding-left: 1.5rem !important;
   font-family: var(--eg-font-serif) !important;
   font-style: italic !important;
@@ -1080,7 +1080,7 @@ a:hover { color: #D4956A; }
 
 /* Trennlinie */
 .wp-block-separator {
-  border-color: #D4956A !important;
+  border-color: #A85D42 !important;
   max-width: 36px !important;
   border-width: .5px !important;
   margin: 1.25rem 0 !important;
@@ -1227,7 +1227,7 @@ h1, h2, h3, h4 {
 .site-footer,
 #colophon {
   border-top: .5px solid rgba(30,27,20,.1) !important;
-  background: #F7F0E6 !important;
+  background: #F2F0EB !important;
   font-family: var(--eg-font-sans) !important;
   font-size: 11px !important;
   color: rgba(30,27,20,.5) !important;
@@ -1255,10 +1255,10 @@ body.eg-dark #masthead {
 }
 body.eg-dark .wp-block-button__link,
 body.eg-dark .kb-button {
-  background: #D4956A !important;
+  background: #A85D42 !important;
   color: #16120C !important;
 }
-body.eg-dark a { color: #D4956A !important; }
+body.eg-dark a { color: #A85D42 !important; }
 body.eg-dark .site-footer,
 body.eg-dark #colophon {
   background: #16120C !important;
