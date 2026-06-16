@@ -12,12 +12,16 @@ $eb_status_check   = get_post_meta(get_the_ID(), 'eb_status',   true) ?: 'einger
 
 // Nicht freigegebene Berichte: niemand darf sie sehen (außer Admins)
 if ( $eb_status_check !== 'freigegeben' && ! current_user_can('edit_posts') ) {
-    wp_redirect( home_url('/alle-berichte') );
+    global $wp_query;
+    $wp_query->set_404();
+    status_header(404);
+    nocache_headers();
+    include get_404_template();
     exit;
 }
 
 // Sichtbarkeit prüfen
-if ( $eb_sichtbar_check === 'mitglieder' && ! current_user_can('eg_mitglied') && ! current_user_can('administrator') ) {
+if ( $eb_sichtbar_check === 'mitglieder' && ! in_array('eg_mitglied', (array) wp_get_current_user()->roles) && ! current_user_can('administrator') ) {
     wp_redirect( home_url('/anmelden') );
     exit;
 }
