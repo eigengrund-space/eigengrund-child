@@ -83,7 +83,7 @@ Text Domain:  eigengrund-child
   --eg-btn-ghost-txt:   #1C1B19;
 
   /* ── NAVIGATION ── */
-  --eg-nav-bg:          rgba(242,240,235,.96);
+  --eg-nav-bg:          rgba(255,255,255,.96);
   --eg-nav-height:      64px;
 
   /* ── TAGS & BADGES ── */
@@ -1229,7 +1229,7 @@ h1, h2, h3, h4 {
 .site-footer,
 #colophon {
   border-top: .5px solid rgba(30,27,20,.1) !important;
-  background: var(--eg-bg) !important;
+  background: var(--eg-card) !important;
   font-family: var(--eg-font-sans) !important;
   font-size: 11px !important;
   color: rgba(30,27,20,.5) !important;
