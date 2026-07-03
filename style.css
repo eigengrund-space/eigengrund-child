@@ -1546,6 +1546,24 @@ body.eg-dark #colophon {
 .eg-impuls-text p { margin-bottom: 1rem; }
 .eg-impuls-text p:last-child { margin-bottom: 0; }
 
+/* ── VIDEO-EMBED ── */
+.eg-video-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin-bottom: 1.25rem;
+  border-radius: 2px;
+  overflow: hidden;
+  background: var(--eg-card);
+}
+.eg-video-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
 /* ── EINGABE-FRAGE (Body + abgehoben) ── */
 .eg-eingabe-frage {
   font-family: var(--eg-font-serif);
