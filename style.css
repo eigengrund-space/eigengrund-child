@@ -62,6 +62,8 @@ Text Domain:  eigengrund-child
   /* ── TEXT ── */
   --eg-text:            #1C1B19;   /* Haupttext */
   --eg-muted:           #837F76;   /* Gedimmter Text */
+  --eg-amber-muted:     #C4937A;   /* Gedämpftes Terracotta */
+  --eg-muted-light:     #C4B8AC;   /* Heller Muted-Ton */
   --eg-text-muted:      rgba(30,27,20,.82);   /* Fließtext, Labels */
   --eg-text-faint:      rgba(30,27,20,.75);   /* Sublabels, Hinweise */
 
