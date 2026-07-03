@@ -54,7 +54,7 @@ Text Domain:  eigengrund-child
   --eg-bg-card:         #F5F3EF;   /* Karten (Alias) */
   --eg-bg-input:        #FFFFFF;   /* Eingabefelder */
   --eg-bg-hint:         rgba(212,149,106,.09);  /* Hinweis-Boxen */
-  --eg-bg-example:      #F0EBE3;   /* Beispiel-Boxen */
+  --eg-bg-example:      #FAFAF8;   /* Beispiel-Boxen */
   --eg-bg-disc:         rgba(30,27,20,.04);     /* Disclaimer */
   --eg-bg-success:      rgba(212,149,106,.09);  /* Erfolgs-Meldung */
   --eg-bg-section:      #F0E8D8;   /* Abschnitt-Hintergrund */
