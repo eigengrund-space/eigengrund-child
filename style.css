@@ -1423,9 +1423,7 @@ body.eg-dark #colophon {
 
 /* ── RAUM-CONTAINER ── */
 .eg-raum {
-  max-width: 680px;
-  margin: 0 auto;
-  padding: 2rem 1.5rem 6rem;
+  padding: 2rem 0 6rem;
 }
 
 /* ── RAUM-TITEL (H1) ── */
