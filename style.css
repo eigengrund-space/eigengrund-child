@@ -49,8 +49,9 @@ Text Domain:  eigengrund-child
 :root {
 
   /* ── FARBEN: TAG-MODUS ── */
-  --eg-bg:              #F2F0EB;   /* Seitenhintergrund warm Creme */
-  --eg-bg-card:         #FDF9F5;   /* Karten */
+  --eg-bg:              #FFFFFF;   /* Seitenhintergrund */
+  --eg-card:            #F5F3EF;   /* Karten */
+  --eg-bg-card:         #F5F3EF;   /* Karten (Alias) */
   --eg-bg-input:        #FFFFFF;   /* Eingabefelder */
   --eg-bg-hint:         rgba(212,149,106,.09);  /* Hinweis-Boxen */
   --eg-bg-example:      #F0EBE3;   /* Beispiel-Boxen */
@@ -60,6 +61,7 @@ Text Domain:  eigengrund-child
 
   /* ── TEXT ── */
   --eg-text:            #1C1B19;   /* Haupttext */
+  --eg-muted:           #837F76;   /* Gedimmter Text */
   --eg-text-muted:      rgba(30,27,20,.82);   /* Fließtext, Labels */
   --eg-text-faint:      rgba(30,27,20,.75);   /* Sublabels, Hinweise */
 
@@ -69,7 +71,7 @@ Text Domain:  eigengrund-child
   --eg-amber-hover:     #C17050;   /* Amber dunkler: Hover-Zustand */
 
   /* ── RAHMEN ── */
-  --eg-border:          rgba(30,27,20,.10);   /* Sehr dezent */
+  --eg-border:          #E3E1DB;              /* Sehr dezent */
   --eg-border-mid:      rgba(30,27,20,.20);   /* Mittel */
   --eg-border-input:    rgba(30,27,20,.22);   /* Eingabefelder */
   --eg-border-focus:    #A85D42;              /* Fokus-Ring: Amber */
@@ -948,8 +950,8 @@ body.eg-dark .eg-btn--amber { color: #16120C; }
 
 /* ── SEITENHINTERGRUND ── */
 body {
-  background-color: #F2F0EB;
-  color: #1C1B19;
+  background-color: var(--eg-bg);
+  color: var(--eg-text);
 }
 
 /* ── TYPOGRAFIE: BASIS-SCHRIFT ── */
@@ -971,7 +973,7 @@ h1, h2, h3, h4, h5, h6,
 .kadence-advanced-heading {
   font-family: var(--eg-font-serif);
   font-weight: 300;
-  color: #1C1B19;
+  color: var(--eg-text);
   line-height: 1.15;
 }
 
@@ -992,22 +994,22 @@ h1 em, h2 em, h3 em,
 
 /* ── LINKS ── */
 a {
-  color: #4A4038;
+  color: var(--eg-accent);
   text-decoration: none;
   transition: color .2s;
 }
-a:hover { color: #A85D42; }
+a:hover { color: var(--eg-amber); }
 
 /* ── BUTTONS ── */
 /* Buttons: Basis via Customizer → Zusätzliches CSS */
 /* Varianten die im Customizer nicht abgedeckt sind: */
 .wp-block-button.is-style-amber .wp-block-button__link {
-  background: #A85D42 !important;
-  color: #1C1B19 !important;
+  background: var(--eg-amber) !important;
+  color: var(--eg-text) !important;
 }
 .wp-block-button.is-style-outline .wp-block-button__link {
   background: transparent !important;
-  color: #1C1B19 !important;
+  color: var(--eg-text) !important;
   border: .5px solid rgba(30,27,20,.2) !important;
 }
 
@@ -1044,7 +1046,7 @@ a:hover { color: #A85D42; }
 /* ── KADENCE DIVIDER / TRENNLINIE ── */
 .kt-divider,
 .wp-block-kadence-spacer hr {
-  border-color: #A85D42 !important;
+  border-color: var(--eg-amber) !important;
   opacity: 1 !important;
 }
 
@@ -1063,7 +1065,7 @@ a:hover { color: #A85D42; }
 /* Zitat / Pull-Quote */
 .wp-block-quote,
 .wp-block-pullquote {
-  border-left: 2px solid #A85D42 !important;
+  border-left: 2px solid var(--eg-amber) !important;
   padding-left: 1.5rem !important;
   font-family: var(--eg-font-serif) !important;
   font-style: italic !important;
@@ -1080,7 +1082,7 @@ a:hover { color: #A85D42; }
 
 /* Trennlinie */
 .wp-block-separator {
-  border-color: #A85D42 !important;
+  border-color: var(--eg-amber) !important;
   max-width: 36px !important;
   border-width: .5px !important;
   margin: 1.25rem 0 !important;
@@ -1227,7 +1229,7 @@ h1, h2, h3, h4 {
 .site-footer,
 #colophon {
   border-top: .5px solid rgba(30,27,20,.1) !important;
-  background: #F2F0EB !important;
+  background: var(--eg-bg) !important;
   font-family: var(--eg-font-sans) !important;
   font-size: 11px !important;
   color: rgba(30,27,20,.5) !important;
