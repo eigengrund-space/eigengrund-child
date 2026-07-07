@@ -1176,8 +1176,10 @@ header .menu a {
 }
 .main-navigation a[href*="mitgliederbereich"],
 .main-navigation a[href*="anmelden"],
+.main-navigation a[href*="mein-raum"],
 .kadence-navigation a[href*="mitgliederbereich"],
-.kadence-navigation a[href*="anmelden"] {
+.kadence-navigation a[href*="anmelden"],
+.kadence-navigation a[href*="mein-raum"] {
   color: var(--eg-accent);
   border: .5px solid var(--eg-tag-b);
   padding: .3rem .85rem;
@@ -1185,7 +1187,9 @@ header .menu a {
   transition: background var(--eg-transition);
 }
 .main-navigation a[href*="mitgliederbereich"]:hover,
-.kadence-navigation a[href*="anmelden"]:hover {
+.main-navigation a[href*="mein-raum"]:hover,
+.kadence-navigation a[href*="anmelden"]:hover,
+.kadence-navigation a[href*="mein-raum"]:hover {
   background: rgba(139,69,19,.06);
 }
 
