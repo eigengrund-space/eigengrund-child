@@ -139,6 +139,15 @@ Text Domain:  eigengrund-child
   --global-palette8:    #F2F0EB;  /* Creme - Seitenhintergrund */
   --global-palette9:    #FFFFFF;  /* Weiss - Karten */
   --eg-btn-shadow:      0 4px 14px rgba(212,149,106,.25);
+
+  /* ── HERO-VERLAUF (Startseite) ──
+     Hero-Sektion hat immer einen hellen Verlauf-Hintergrund, unabhängig
+     vom Tag/Nacht-Toggle – deshalb eigene, NICHT in body.eg-dark
+     überschriebene Tokens für Text/Akzent statt --eg-text/--eg-amber. */
+  --eg-hero-gradient:   linear-gradient(150deg, #FAF0D8 0%, #F0C88A 40%, #D4956A 80%, #C07850 100%);
+  --eg-hero-text:       #1C1B19;
+  --eg-hero-accent:     #A85D42;
+  --eg-hero-muted:      rgba(28,27,25,.78);
 }
 
 /* ── NACHT-MODUS ── */

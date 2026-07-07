@@ -14,7 +14,7 @@ get_header();
 
 /* ── HERO ── */
 .egs-hero {
-    background: linear-gradient(150deg, #FAF0D8 0%, #F0C88A 40%, #D4956A 80%, #C07850 100%);
+    background: var(--eg-hero-gradient);
     padding: 10rem 6% 5rem;
     position: relative;
     overflow: hidden;
@@ -24,9 +24,9 @@ get_header();
 }
 .egs-hero-bg {
     position: absolute; right: -1rem; bottom: -2rem;
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--eg-font-serif);
     font-size: 22vw; font-weight: 300; font-style: italic;
-    color: rgba(30,27,20,.02); line-height: 1;
+    color: rgba(28,27,25,.02); line-height: 1;
     pointer-events: none; user-select: none;
 }
 .egs-hero-inner {
@@ -38,15 +38,15 @@ get_header();
 }
 
 .egs-h1 {
-    font-family: 'Cormorant Garamond', serif; font-weight: 300;
+    font-family: var(--eg-font-serif); font-weight: 300;
     font-size: clamp(42px, 7vw, 86px); line-height: 1.08;
-    color: #1E1B14; margin-bottom: 1.25rem; max-width: 700px;
+    color: var(--eg-hero-text); margin-bottom: 1.25rem; max-width: 700px;
 }
-.egs-h1 em { font-style: italic; color: #6B3A1F; }
+.egs-h1 em { font-style: italic; color: var(--eg-hero-accent); }
 .egs-lead {
-    font-family: 'Cormorant Garamond', serif; font-weight: 300;
+    font-family: var(--eg-font-serif); font-weight: 300;
     font-style: italic; font-size: clamp(18px, 2.5vw, 26px);
-    line-height: 1.55; color: rgba(30,27,20,.78);
+    line-height: 1.55; color: var(--eg-hero-muted);
     margin: 0; max-width: 560px;
 }
 
