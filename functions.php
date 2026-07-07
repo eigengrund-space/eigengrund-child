@@ -9,8 +9,8 @@
 add_action( 'wp_enqueue_scripts', 'eigengrund_enqueue' );
 function eigengrund_enqueue() {
     wp_enqueue_style( 'eigengrund-fonts',
-        'https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;1,300&family=Inter:wght@400;500&display=swap',
-        array(), null );
+        get_stylesheet_directory_uri() . '/fonts/fonts.css',
+        array(), '1.0.0' );
     wp_enqueue_style( 'kadence-style',
         get_template_directory_uri() . '/style.css',
         array(), wp_get_theme( 'kadence' )->get( 'Version' ) );
@@ -25,8 +25,8 @@ function eigengrund_enqueue() {
 add_action( 'enqueue_block_editor_assets', 'eigengrund_editor_fonts' );
 function eigengrund_editor_fonts() {
     wp_enqueue_style( 'eigengrund-fonts-editor',
-        'https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;1,300&family=Inter:wght@400;500&display=swap',
-        array(), null );
+        get_stylesheet_directory_uri() . '/fonts/fonts.css',
+        array(), '1.0.0' );
 }
 
 
@@ -78,7 +78,7 @@ function eigengrund_setup() {
 add_action( 'after_setup_theme', 'eigengrund_editor_styles' );
 function eigengrund_editor_styles() {
     add_editor_style( array(
-        'https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;1,300&family=Inter:wght@400;500&display=swap',
+        get_stylesheet_directory_uri() . '/fonts/fonts.css',
         get_stylesheet_directory_uri() . '/style.css',
     ) );
 }
@@ -506,8 +506,8 @@ add_action( 'init', function() {
 add_action( 'wp_head', 'eigengrund_font_preload', 1 );
 function eigengrund_font_preload() {
     $fonts = array(
-        'https://fonts.gstatic.com/s/newsreader/v26/cY9kfjOCX1hbuyalUrK439vogqC9yFZCYg7oRZaLP4obnf7fTXglsMx2T9ZHFjQ.woff2',
-        'https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2',
+        get_stylesheet_directory_uri() . '/fonts/Newsreader_24pt-Regular.woff2',
+        get_stylesheet_directory_uri() . '/fonts/Inter_18pt-Regular.woff2',
     );
     foreach ( $fonts as $url ) {
         echo '<link rel="preload" href="' . esc_url( $url ) . '" as="font" type="font/woff2" crossorigin="anonymous">' . "\n";
