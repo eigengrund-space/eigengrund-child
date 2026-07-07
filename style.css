@@ -1960,82 +1960,6 @@ body.eg-dark #colophon {
 }
 .eg-sc-cta .eg-btn { white-space: nowrap; flex-shrink: 0; }
 
-/* ── MITGLIEDER TEASER ── */
-.eg-sc-mt {
-  padding: 4.5rem 2.5rem;
-  background: var(--eg-bg);
-}
-.eg-sc-mt-inner { max-width: 560px; }
-.eg-sc-mt-label {
-  font-size: 10px;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--eg-accent);
-  margin-bottom: 1rem;
-  font-family: var(--eg-font-sans);
-}
-.eg-sc-mt-h2 {
-  font-family: var(--eg-font-serif);
-  font-weight: 300;
-  font-size: clamp(22px, 3.5vw, 36px);
-  color: var(--eg-text);
-  margin-bottom: 1.25rem;
-}
-.eg-sc-mt-h2 em { font-style: italic; color: var(--eg-accent); }
-.eg-sc-mt-body {
-  font-size: 15px;
-  line-height: 1.9;
-  color: var(--eg-text-muted);
-  margin-bottom: 2rem;
-  font-family: var(--eg-font-sans);
-  font-weight: 300;
-}
-
-/* ── PROZESS AUSBLICK ── */
-.eg-sc-pa {
-  padding: 4rem 2.5rem;
-  background: var(--eg-bg-section);
-}
-.eg-sc-pa-card {
-  max-width: 560px;
-  background: var(--global-palette9);
-  border: .5px solid var(--eg-border);
-  border-radius: var(--eg-radius-sm);
-  padding: 2rem 2.25rem;
-  transition: background var(--eg-transition), border-color var(--eg-transition);
-}
-.eg-sc-pa-card:hover {
-  background: rgba(30,27,20,.025);
-  border-color: var(--eg-border-mid);
-}
-.eg-sc-pa-h2 {
-  font-family: var(--eg-font-serif);
-  font-weight: 300;
-  font-size: clamp(22px, 3vw, 34px);
-  color: var(--eg-text);
-  margin: 0 0 .9rem;
-}
-.eg-sc-pa-body {
-  font-size: 15px;
-  line-height: 1.9;
-  color: var(--eg-text-muted);
-  margin: 0 0 1.75rem;
-  font-family: var(--eg-font-sans);
-  font-weight: 300;
-}
-.eg-sc-pa-link {
-  display: inline-flex;
-  align-items: center;
-  gap: .45rem;
-  font-family: var(--eg-font-sans);
-  font-size: 11px;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--eg-accent);
-  text-decoration: none;
-}
-.eg-sc-pa-arrow { color: var(--eg-amber); font-size: 13px; }
-
 /* ── NEWSLETTER BOX (.eg-nl-*) ── */
 .eg-nl-box {
   background: var(--eg-bg-hint);
@@ -2112,42 +2036,6 @@ body.eg-dark #colophon {
   .eg-nl-btn { border-radius: 0 0 var(--eg-radius-sm) var(--eg-radius-sm); text-align: center; }
 }
 
-/* ── ANMELDEN SHORTCODE ── */
-.eg-sc-anmelden-wrap { max-width: 600px; margin: 0 auto; padding: 3rem 0 5rem; }
-.eg-sc-anmelden-h1 {
-  font-family: var(--eg-font-serif);
-  font-weight: 300;
-  font-size: clamp(28px, 4vw, 46px);
-  line-height: 1.15;
-  color: var(--eg-text);
-  margin-bottom: 1.25rem;
-}
-.eg-sc-anmelden-h1 em { font-style: italic; color: var(--eg-accent); }
-.eg-sc-features { list-style: none; padding: 0; margin: 0 0 2.5rem; }
-.eg-sc-features li {
-  display: flex;
-  gap: .75rem;
-  font-size: 14px;
-  line-height: 1.7;
-  color: var(--eg-text-muted);
-  padding: .5rem 0;
-  border-bottom: .5px solid var(--eg-border);
-  font-family: var(--eg-font-sans);
-}
-.eg-sc-features li:last-child { border-bottom: none; }
-.eg-sc-features li::before { content: '→'; color: var(--eg-amber); flex-shrink: 0; }
-.eg-sc-anmelden-wrap .eg-nl-box { margin-bottom: 2rem; }
-.eg-sc-back {
-  display: inline-block;
-  margin-top: 2.5rem;
-  font-size: 11px;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--eg-accent);
-  text-decoration: none;
-  font-family: var(--eg-font-sans);
-}
-
 /* ── PFEIL-LISTE (Block Pattern) ── */
 .eg-pfeil-liste { list-style: none; padding: 0; margin: 0; }
 .eg-pfeil-liste li {
@@ -2169,7 +2057,5 @@ body.eg-dark #colophon {
   .eg-sc-eb-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 680px) {
-  .eg-sc-cta,
-  .eg-sc-mt,
-  .eg-sc-pa { padding: 3rem 1.25rem; }
+  .eg-sc-cta { padding: 3rem 1.25rem; }
 }
