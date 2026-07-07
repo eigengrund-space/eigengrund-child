@@ -1001,3 +1001,59 @@ function eg_remove_external_google_fonts() {
         }
     }
 }
+
+// ── MEIN-RAUM: DYNAMISCHE DASHBOARD-DATEN ───────────────────────────
+
+add_shortcode( 'eg_mein_raum_name', 'eg_mein_raum_name_sc' );
+function eg_mein_raum_name_sc() {
+    if ( ! is_user_logged_in() ) return '';
+    $user = wp_get_current_user();
+    return esc_html( $user->first_name ?: $user->display_name );
+}
+
+add_shortcode( 'eg_mein_raum_seit', 'eg_mein_raum_seit_sc' );
+function eg_mein_raum_seit_sc() {
+    if ( ! is_user_logged_in() ) return '';
+    $user_id = get_current_user_id();
+
+    // PMPro-Startdatum der aktuell aktiven Mitgliedschaft holen
+    if ( function_exists( 'pmpro_getMembershipLevelForUser' ) ) {
+        $level = pmpro_getMembershipLevelForUser( $user_id );
+        if ( $level && ! empty( $level->startdate ) ) {
+            return date_i18n( 'F Y', $level->startdate );
+        }
+    }
+
+    // Fallback: WordPress-Registrierungsdatum
+    $user = get_userdata( $user_id );
+    return $user ? date_i18n( 'F Y', strtotime( $user->user_registered ) ) : '';
+}
+
+add_shortcode( 'eg_mein_raum_fortschritt', 'eg_mein_raum_fortschritt_sc' );
+function eg_mein_raum_fortschritt_sc( $atts ) {
+    if ( ! is_user_logged_in() ) return '';
+    $atts    = shortcode_atts( array( 'raum' => 'scham' ), $atts );
+    $user_id = get_current_user_id();
+
+    global $wpdb;
+
+    // Fortschritt liegt in ytyw_eg_user_fortschritt (nicht in User-Meta):
+    // eine Zeile pro user_id + raum_id, einheit_nummer = zuletzt
+    // abgeschlossene Einheit. Raum wird über den Slug in
+    // eg_emotionsraeume aufgelöst.
+    $raum = $wpdb->get_row( $wpdb->prepare(
+        "SELECT id FROM {$wpdb->prefix}eg_emotionsraeume WHERE slug = %s AND status = 'live'",
+        sanitize_title( $atts['raum'] )
+    ) );
+    if ( ! $raum ) return 'Noch nicht begonnen';
+
+    $fortschritt = $wpdb->get_row( $wpdb->prepare(
+        "SELECT einheit_nummer FROM {$wpdb->prefix}eg_user_fortschritt WHERE user_id = %d AND raum_id = %d",
+        $user_id, $raum->id
+    ) );
+
+    $tag = $fortschritt ? (int) $fortschritt->einheit_nummer : 0;
+    if ( ! $tag ) return 'Noch nicht begonnen';
+
+    return sprintf( 'Tag %d von 21', min( $tag, 21 ) );
+}
