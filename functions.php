@@ -1051,9 +1051,13 @@ function eg_mein_raum_fortschritt_sc( $atts ) {
         "SELECT einheit_nummer FROM {$wpdb->prefix}eg_user_fortschritt WHERE user_id = %d AND raum_id = %d",
         $user_id, $raum->id
     ) );
+    if ( ! $fortschritt ) return 'Noch nicht begonnen';
 
-    $tag = $fortschritt ? (int) $fortschritt->einheit_nummer : 0;
-    if ( ! $tag ) return 'Noch nicht begonnen';
+    // einheit_nummer speichert die zuletzt ABGESCHLOSSENE Einheit, nicht die
+    // aktuelle — gleiche Berechnung wie render_raum() in class-frontend.php
+    // ($aktuelle = min($abgeschlossen_bis + 1, EG_MAX_EINHEITEN)).
+    $max_einheiten = defined( 'EG_MAX_EINHEITEN' ) ? EG_MAX_EINHEITEN : 21;
+    $tag           = min( (int) $fortschritt->einheit_nummer + 1, $max_einheiten );
 
-    return sprintf( 'Tag %d von 21', min( $tag, 21 ) );
+    return sprintf( 'Tag %d von %d', $tag, $max_einheiten );
 }
