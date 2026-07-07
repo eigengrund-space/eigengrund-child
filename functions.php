@@ -979,3 +979,25 @@ function eg_sync_mitglied_rolle( $level_id, $user_id, $cancel_level = null ) {
         $user->remove_role( 'eg_mitglied' );
     }
 }
+
+// ── EXTERNE GOOGLE-FONTS-REQUESTS SYSTEMWEIT BLOCKIEREN ─────────────
+// Fängt jede Stylesheet-Registrierung ab, die auf fonts.googleapis.com
+// zeigt — unabhängig davon, ob sie aus dem Theme, aus Kadence Blocks
+// oder aus einem Plugin kommt. Läuft mit später Priorität, nachdem
+// alle anderen Enqueues bereits registriert haben.
+
+add_action( 'wp_enqueue_scripts', 'eg_remove_external_google_fonts', 100 );
+function eg_remove_external_google_fonts() {
+    global $wp_styles;
+
+    if ( empty( $wp_styles->registered ) ) {
+        return;
+    }
+
+    foreach ( $wp_styles->registered as $handle => $dep ) {
+        if ( isset( $dep->src ) && is_string( $dep->src ) && strpos( $dep->src, 'fonts.googleapis.com' ) !== false ) {
+            wp_dequeue_style( $handle );
+            wp_deregister_style( $handle );
+        }
+    }
+}
