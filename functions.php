@@ -785,3 +785,197 @@ function eigengrund_article_schema() {
 
 // ── PMPRO COOKIES DEAKTIVIEREN ───────────────────────────────
 add_filter( 'pmpro_set_cookie', '__return_false' );
+
+// ── SHARE-BUTTON: WIEDERVERWENDBARE FUNKTIONEN ──────────────────────
+// Generisch nutzbar auf jeder Seite/jedem Post-Type. Wird aktuell von
+// eigengrund-erfahrungsberichte.php automatisch um jeden Bericht gewickelt;
+// kann später auch manuell in Themen-/Prozess-Seiten-Templates eingesetzt
+// werden über: echo eg_share_button_markup();
+
+function eg_share_button_markup() {
+    return <<<'HTML'
+<div class="eg-share" style="position:relative;display:inline-block;font-family:var(--eg-font-sans);margin:1.5rem 0;">
+
+  <button type="button" class="eg-share-btn" aria-haspopup="true" aria-expanded="false" style="
+    display:inline-flex;align-items:center;gap:.5rem;
+    background:transparent;border:.5px solid var(--eg-border-mid, rgba(30,27,20,.2));
+    border-radius:var(--eg-radius-sm,2px);
+    padding:.55rem 1.1rem;
+    font-family:var(--eg-font-sans);font-weight:400;font-size:13px;
+    letter-spacing:.04em;color:var(--eg-accent);
+    cursor:pointer;transition:border-color var(--eg-transition,.2s ease),background var(--eg-transition,.2s ease);
+  ">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"></line><line x1="15.4" y1="6.5" x2="8.6" y2="10.5"></line></svg>
+    Teilen
+  </button>
+
+  <div class="eg-share-menu" role="menu" style="
+    display:none;position:absolute;top:calc(100% + 8px);left:0;z-index:20;
+    background:#fff;border:.5px solid var(--eg-border-mid, rgba(30,27,20,.15));
+    border-radius:var(--eg-radius-sm,2px);
+    box-shadow:0 8px 24px rgba(30,27,20,.12);
+    min-width:210px;padding:.4rem;
+  ">
+    <button class="eg-share-opt" data-platform="whatsapp" role="menuitem">
+      <span class="eg-share-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.3-1.39a9.9 9.9 0 0 0 4.69 1.19h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.87 9.87 0 0 0 12.04 2zm5.8 14.16c-.24.68-1.4 1.3-1.93 1.38-.49.08-1.1.11-1.78-.11-.41-.13-.94-.31-1.62-.6-2.85-1.23-4.71-4.1-4.85-4.29-.14-.19-1.16-1.54-1.16-2.94 0-1.4.73-2.09.99-2.38.26-.28.56-.35.75-.35.19 0 .37 0 .53.01.17.01.4-.06.62.48.24.58.81 2 .88 2.14.07.14.12.31.02.5-.09.19-.14.31-.28.48-.14.17-.29.37-.42.5-.14.14-.28.29-.12.57.16.28.71 1.18 1.53 1.91 1.05.94 1.94 1.23 2.22 1.37.28.14.44.12.6-.07.17-.19.71-.83.9-1.11.19-.28.38-.24.63-.14.26.09 1.63.77 1.91.91.28.14.47.21.53.33.07.12.07.68-.17 1.36z"/></svg>
+      </span>
+      WhatsApp
+    </button>
+
+    <button class="eg-share-opt" data-platform="telegram" role="menuitem">
+      <span class="eg-share-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21.94 3.94a1.5 1.5 0 0 0-1.53-.26L2.6 10.36c-1.06.4-1.05 1.94.02 2.32l4.5 1.6 1.72 5.53c.28.9 1.42 1.15 2.05.46l2.44-2.66 4.53 3.34c.83.61 2.02.15 2.22-.86l3.14-15.4a1.5 1.5 0 0 0-.58-1.55zM9.3 14.55l-.02 3.2-1.4-4.5 10.8-6.9-9.38 8.2z"/></svg>
+      </span>
+      Telegram
+    </button>
+
+    <button class="eg-share-opt" data-platform="email" role="menuitem">
+      <span class="eg-share-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M2 6l10 7 10-7"></path></svg>
+      </span>
+      E-Mail
+    </button>
+
+    <button class="eg-share-opt" data-platform="native" role="menuitem" style="display:none;">
+      <span class="eg-share-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
+      </span>
+      Andere App …
+    </button>
+
+    <div style="height:.5px;background:var(--eg-border,#E3E1DB);margin:.35rem .5rem;"></div>
+
+    <button class="eg-share-opt" data-platform="copy" role="menuitem">
+      <span class="eg-share-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+      </span>
+      <span class="eg-share-copy-label">Link kopieren</span>
+    </button>
+  </div>
+</div>
+HTML;
+}
+
+/**
+ * Style + Script einmal pro Seitenaufruf, im Footer. Site-weit — kein
+ * is_singular-Filter mehr, damit der Button auch auf künftigen
+ * Themen-/Prozess-Seiten ohne weitere Anpassung funktioniert.
+ */
+add_action( 'wp_footer', 'eg_share_button_assets' );
+function eg_share_button_assets() {
+    static $printed = false;
+    if ( $printed ) {
+        return;
+    }
+    $printed = true;
+    ?>
+    <style>
+      .eg-share-opt {
+        display: flex; align-items: center; gap: .65rem;
+        width: 100%; text-align: left; background: transparent; border: none;
+        padding: .6rem .7rem; border-radius: 2px; cursor: pointer;
+        font-family: var(--eg-font-sans); font-size: 13.5px; color: var(--eg-text, #1C1B19);
+        transition: background .15s ease;
+      }
+      .eg-share-opt:hover { background: var(--eg-bg-hint, rgba(212,149,106,.09)); }
+      .eg-share-icon { display:inline-flex; color: var(--eg-amber, #A85D42); }
+      .eg-share-btn:hover { border-color: var(--eg-amber, #A85D42); background: var(--eg-bg-hint, rgba(212,149,106,.09)); }
+    </style>
+    <script>
+    (function(){
+      document.querySelectorAll('.eg-share').forEach(function(root){
+        var btn  = root.querySelector('.eg-share-btn');
+        var menu = root.querySelector('.eg-share-menu');
+        if (!btn || !menu) return;
+
+        var nativeOpt = root.querySelector('[data-platform="native"]');
+        if (navigator.share) { nativeOpt.style.display = 'flex'; }
+
+        function taggedUrl(platform){
+          var base = window.location.origin + window.location.pathname;
+          var params = new URLSearchParams();
+          params.set('mtm_campaign', 'teilen');
+          params.set('mtm_source', platform);
+          params.set('mtm_medium', 'share');
+          params.set('mtm_content', window.location.pathname.split('/').filter(Boolean).pop() || 'startseite');
+          return base + '?' + params.toString();
+        }
+
+        function closeMenu(){
+          menu.style.display = 'none';
+          btn.setAttribute('aria-expanded', 'false');
+        }
+
+        btn.addEventListener('click', function(e){
+          e.stopPropagation();
+          var isOpen = menu.style.display === 'block';
+          document.querySelectorAll('.eg-share-menu').forEach(function(m){ m.style.display = 'none'; });
+          menu.style.display = isOpen ? 'none' : 'block';
+          btn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+        });
+
+        document.addEventListener('click', function(e){
+          if (!root.contains(e.target)) closeMenu();
+        });
+        document.addEventListener('keydown', function(e){
+          if (e.key === 'Escape') closeMenu();
+        });
+
+        root.querySelectorAll('.eg-share-opt').forEach(function(opt){
+          opt.addEventListener('click', function(){
+            var platform = opt.getAttribute('data-platform');
+            var title = document.title.split('–')[0].split('|')[0].trim();
+            var url = taggedUrl(platform);
+
+            if (platform === 'whatsapp') {
+              window.open('https://wa.me/?text=' + encodeURIComponent(title + ' — ' + url), '_blank');
+            } else if (platform === 'telegram') {
+              window.open('https://t.me/share/url?url=' + encodeURIComponent(url) + '&text=' + encodeURIComponent(title), '_blank');
+            } else if (platform === 'email') {
+              window.location.href = 'mailto:?subject=' + encodeURIComponent(title) + '&body=' + encodeURIComponent(url);
+            } else if (platform === 'native' && navigator.share) {
+              navigator.share({ title: title, url: url }).catch(function(){});
+            } else if (platform === 'copy') {
+              navigator.clipboard.writeText(url).then(function(){
+                var label = root.querySelector('.eg-share-copy-label');
+                var original = label.textContent;
+                label.textContent = 'Kopiert ✓';
+                setTimeout(function(){ label.textContent = original; }, 1800);
+              });
+            }
+            closeMenu();
+          });
+        });
+      });
+    })();
+    </script>
+    <?php
+}
+
+// ── PMPRO: ROLLEN-SYNC FÜR EBENE 3 (JAHRESRAUM) ─────────────────────
+// Vergibt/entzieht die Rolle 'eg_mitglied' automatisch, sobald sich der
+// PMPro-Mitgliedsstatus für Level 3 ändert. Nutzt pmpro_hasMembershipLevel()
+// statt nur den übergebenen $level_id zu vergleichen — bleibt so auch
+// korrekt, falls später mehrere Level gleichzeitig möglich sind oder ein
+// Level gekündigt statt gewechselt wird.
+
+define( 'EG_JAHRESRAUM_LEVEL_ID', 3 );
+
+add_action( 'pmpro_after_change_membership_level', 'eg_sync_mitglied_rolle', 10, 3 );
+function eg_sync_mitglied_rolle( $level_id, $user_id, $cancel_level = null ) {
+    if ( ! function_exists( 'pmpro_hasMembershipLevel' ) ) {
+        return;
+    }
+
+    $user = get_user_by( 'id', $user_id );
+    if ( ! $user ) {
+        return;
+    }
+
+    if ( pmpro_hasMembershipLevel( EG_JAHRESRAUM_LEVEL_ID, $user_id ) ) {
+        $user->add_role( 'eg_mitglied' );
+    } else {
+        $user->remove_role( 'eg_mitglied' );
+    }
+}
