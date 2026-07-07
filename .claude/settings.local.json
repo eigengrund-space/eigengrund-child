@@ -9,7 +9,13 @@
       "Bash(git -C 'C:\\\\Users\\\\malte\\\\eigengrund-space\\\\themes\\\\eigengrund-child' commit -m ' *)",
       "Bash(git -C \"C:\\\\Users\\\\malte\\\\eigengrund-space\\\\themes\\\\eigengrund-child\" push origin staging)",
       "Bash(git -C \"C:\\\\Users\\\\malte\\\\eigengrund-space\\\\themes\\\\eigengrund-child\" add page-startseite.php)",
-      "Bash(git -C \"C:\\\\Users\\\\malte\\\\eigengrund-space\\\\themes\\\\eigengrund-child\" add style.css)"
+      "Bash(git -C \"C:\\\\Users\\\\malte\\\\eigengrund-space\\\\themes\\\\eigengrund-child\" add style.css)",
+      "PowerShell(py *)",
+      "Bash(npm --version)",
+      "Bash(where node *)",
+      "Bash(npm ls *)",
+      "Bash(npx --yes ttf2woff2 --help)",
+      "Bash(php -l themes/eigengrund-child/functions.php)"
     ]
   }
 }

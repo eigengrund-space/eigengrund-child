@@ -59,6 +59,16 @@ get_header();
 /* ── RESPONSIVE ── */
 @media (max-width: 680px) {
     .egs-hero { padding: 0 6%; min-height: 100svh; }
+
+    .egs-body {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+
+    .egs-body > section {
+        margin-left: -1.25rem;
+        margin-right: -1.25rem;
+    }
 }
 </style>
 
