@@ -2052,6 +2052,67 @@ body.eg-dark #colophon {
 .eg-pfeil-liste li:last-child { border-bottom: none; }
 .eg-pfeil-liste li::before { content: "→"; color: var(--eg-amber); flex-shrink: 0; margin-top: .05em; }
 
+/* ── SHARE-BUTTON (functions.php: eg_share_button_markup()) ── */
+.eg-share {
+  position: relative;
+  display: inline-block;
+  font-family: var(--eg-font-sans);
+  margin: 1.5rem 0;
+}
+.eg-share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  background: transparent;
+  border: .5px solid var(--eg-border-mid);
+  border-radius: var(--eg-radius-sm);
+  padding: .55rem 1.1rem;
+  font-family: var(--eg-font-sans);
+  font-weight: 400;
+  font-size: 13px;
+  letter-spacing: .04em;
+  color: var(--eg-accent);
+  cursor: pointer;
+  transition: border-color var(--eg-transition), background var(--eg-transition);
+}
+.eg-share-btn:hover { border-color: var(--eg-amber); background: var(--eg-bg-hint); }
+.eg-share-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 20;
+  background: #fff;
+  border: .5px solid var(--eg-border-mid);
+  border-radius: var(--eg-radius-sm);
+  box-shadow: 0 8px 24px rgba(30,27,20,.12);
+  min-width: 210px;
+  padding: .4rem;
+}
+.eg-share-divider {
+  height: .5px;
+  background: var(--eg-border);
+  margin: .35rem .5rem;
+}
+.eg-share-opt {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  padding: .6rem .7rem;
+  border-radius: 2px;
+  cursor: pointer;
+  font-family: var(--eg-font-sans);
+  font-size: 13.5px;
+  color: var(--eg-text);
+  transition: background .15s ease;
+}
+.eg-share-opt:hover { background: var(--eg-bg-hint); }
+.eg-share-icon { display: inline-flex; color: var(--eg-amber); }
+
 /* ── RESPONSIVE ── */
 @media (max-width: 640px) {
   .eg-sc-eb-grid { grid-template-columns: 1fr; }

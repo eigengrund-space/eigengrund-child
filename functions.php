@@ -654,28 +654,14 @@ add_filter( 'pmpro_set_cookie', '__return_false' );
 
 function eg_share_button_markup() {
     return <<<'HTML'
-<div class="eg-share" style="position:relative;display:inline-block;font-family:var(--eg-font-sans);margin:1.5rem 0;">
+<div class="eg-share">
 
-  <button type="button" class="eg-share-btn" aria-haspopup="true" aria-expanded="false" style="
-    display:inline-flex;align-items:center;gap:.5rem;
-    background:transparent;border:.5px solid var(--eg-border-mid, rgba(30,27,20,.2));
-    border-radius:var(--eg-radius-sm,2px);
-    padding:.55rem 1.1rem;
-    font-family:var(--eg-font-sans);font-weight:400;font-size:13px;
-    letter-spacing:.04em;color:var(--eg-accent);
-    cursor:pointer;transition:border-color var(--eg-transition,.2s ease),background var(--eg-transition,.2s ease);
-  ">
+  <button type="button" class="eg-share-btn" aria-haspopup="true" aria-expanded="false">
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"></line><line x1="15.4" y1="6.5" x2="8.6" y2="10.5"></line></svg>
     Teilen
   </button>
 
-  <div class="eg-share-menu" role="menu" style="
-    display:none;position:absolute;top:calc(100% + 8px);left:0;z-index:20;
-    background:#fff;border:.5px solid var(--eg-border-mid, rgba(30,27,20,.15));
-    border-radius:var(--eg-radius-sm,2px);
-    box-shadow:0 8px 24px rgba(30,27,20,.12);
-    min-width:210px;padding:.4rem;
-  ">
+  <div class="eg-share-menu" role="menu">
     <button class="eg-share-opt" data-platform="whatsapp" role="menuitem">
       <span class="eg-share-icon">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.3-1.39a9.9 9.9 0 0 0 4.69 1.19h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.87 9.87 0 0 0 12.04 2zm5.8 14.16c-.24.68-1.4 1.3-1.93 1.38-.49.08-1.1.11-1.78-.11-.41-.13-.94-.31-1.62-.6-2.85-1.23-4.71-4.1-4.85-4.29-.14-.19-1.16-1.54-1.16-2.94 0-1.4.73-2.09.99-2.38.26-.28.56-.35.75-.35.19 0 .37 0 .53.01.17.01.4-.06.62.48.24.58.81 2 .88 2.14.07.14.12.31.02.5-.09.19-.14.31-.28.48-.14.17-.29.37-.42.5-.14.14-.28.29-.12.57.16.28.71 1.18 1.53 1.91 1.05.94 1.94 1.23 2.22 1.37.28.14.44.12.6-.07.17-.19.71-.83.9-1.11.19-.28.38-.24.63-.14.26.09 1.63.77 1.91.91.28.14.47.21.53.33.07.12.07.68-.17 1.36z"/></svg>
@@ -704,7 +690,7 @@ function eg_share_button_markup() {
       Andere App …
     </button>
 
-    <div style="height:.5px;background:var(--eg-border,#E3E1DB);margin:.35rem .5rem;"></div>
+    <div class="eg-share-divider"></div>
 
     <button class="eg-share-opt" data-platform="copy" role="menuitem">
       <span class="eg-share-icon">
@@ -730,18 +716,6 @@ function eg_share_button_assets() {
     }
     $printed = true;
     ?>
-    <style>
-      .eg-share-opt {
-        display: flex; align-items: center; gap: .65rem;
-        width: 100%; text-align: left; background: transparent; border: none;
-        padding: .6rem .7rem; border-radius: 2px; cursor: pointer;
-        font-family: var(--eg-font-sans); font-size: 13.5px; color: var(--eg-text, #1C1B19);
-        transition: background .15s ease;
-      }
-      .eg-share-opt:hover { background: var(--eg-bg-hint, rgba(212,149,106,.09)); }
-      .eg-share-icon { display:inline-flex; color: var(--eg-amber, #A85D42); }
-      .eg-share-btn:hover { border-color: var(--eg-amber, #A85D42); background: var(--eg-bg-hint, rgba(212,149,106,.09)); }
-    </style>
     <script>
     (function(){
       document.querySelectorAll('.eg-share').forEach(function(root){
