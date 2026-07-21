@@ -97,11 +97,11 @@ get_header(); ?>
 }
 </style>
 
-<div class="eg-mr-wrap">
+<div class="eg-mr-wrap entry-content">
 
   <div class="eg-tag">Mein Raum</div>
 
-  <h1>Willkommen, <em style="color:var(--eg-amber);"><?php echo do_shortcode('[pmpro_member field="first_name"]'); ?></em></h1>
+  <h1 class="wp-block-heading">Willkommen, <em style="color:var(--eg-amber);"><?php echo do_shortcode('[pmpro_member field="first_name"]'); ?></em></h1>
 
   <div style="width:36px;height:.5px;background:var(--eg-amber);margin:1.25rem 0 1.5rem;"></div>
 
