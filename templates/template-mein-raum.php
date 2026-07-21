@@ -9,6 +9,7 @@ get_header(); ?>
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem 2.5rem;
+    padding-top: 100px;
 }
 .eg-mr-layout {
     display: flex;
