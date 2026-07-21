@@ -2129,3 +2129,8 @@ body.eg-dark #colophon {
 @media (max-width: 680px) {
   .eg-sc-cta { padding: 3rem 1.25rem; }
 }
+
+body.page-template-templates-template-mein-raum-php.transparent-header #masthead {
+    position: relative !important;
+    background: #fff !important;
+}
