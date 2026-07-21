@@ -135,7 +135,7 @@ get_header(); ?>
           </a>
         <?php endforeach; ?>
 
-        <a href="<?php echo wp_logout_url(home_url()); ?>" class="eg-mr-logout">Abmelden</a>
+        <a href="<?php echo home_url('/login/'); ?>" class="eg-mr-logout">Abmelden</a>
       </div>
       <div class="eg-mr-divider"></div>
     </nav>
