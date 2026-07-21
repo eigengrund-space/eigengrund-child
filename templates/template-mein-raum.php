@@ -98,7 +98,15 @@ get_header(); ?>
 
 <div class="eg-mr-wrap">
 
+  <div class="eg-tag">Mein Raum</div>
+
   <h1>Willkommen, <em style="color:var(--eg-amber);"><?php echo do_shortcode('[pmpro_member field="first_name"]'); ?></em></h1>
+
+  <div style="width:36px;height:.5px;background:var(--eg-amber);margin:1.25rem 0 1.5rem;"></div>
+
+  <div style="font-size:13px;color:var(--eg-muted);margin-bottom:2rem;">
+    Mitglied seit <?php echo do_shortcode('[eg_mein_raum_seit]'); ?>
+  </div>
 
   <div class="eg-mr-layout">
 
