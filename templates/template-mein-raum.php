@@ -117,7 +117,7 @@ get_header(); ?>
         <?php
         $nav_items = [
           ['label' => 'Mein Raum',         'path' => '/mein-raum/'],
-          ['label' => 'Profil bearbeiten',  'path' => '/kontodaten/your-profile/'],
+          ['label' => 'Konto verwalten',    'path' => '/kontodaten/'],
           ['label' => 'Buchung ändern',     'path' => '/pakete/'],
         ];
         $current_path = trailingslashit(parse_url(home_url($_SERVER['REQUEST_URI']), PHP_URL_PATH));
