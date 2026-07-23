@@ -893,5 +893,5 @@ function eg_mein_raum_fortschritt_sc( $atts ) {
     $max_einheiten = defined( 'EG_MAX_EINHEITEN' ) ? EG_MAX_EINHEITEN : 21;
     $tag           = min( (int) $fortschritt->einheit_nummer + 1, $max_einheiten );
 
-    return sprintf( 'Tag %d von %d', $tag, $max_einheiten );
+    return sprintf( 'Einheit %d von %d', $tag, $max_einheiten );
 }
