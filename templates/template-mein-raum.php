@@ -99,7 +99,7 @@ get_header(); ?>
 
 <div class="eg-mr-wrap">
 
-  <div class="eg-tag" style="margin-bottom:.75rem;">Mein Raum</div> <br> <br>
+  <div class="eg-tag" style="margin-bottom:.75rem;">Mein Raum</div> <br> <br> <br>
 
   <h1 style="margin-top:0;margin-bottom:26px;">Willkommen, <em style="color:var(--eg-amber);"><?php echo do_shortcode('[pmpro_member field="first_name"]'); ?></em></h1>
 
