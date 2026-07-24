@@ -355,7 +355,7 @@ add_action( 'init', function() {
 // SEO & AUTOMATISIERUNGEN
 // Hinzugefügt: April 2026
 // Enthält: B3 Open Graph · B4 Canonical · E1 Auto-Meta-Description
-//          E3 FAQPage Schema · E4 Article Schema · E5 Font-Preload
+//          E4 Article Schema · E5 Font-Preload
 // ============================================================
 
 
@@ -533,61 +533,6 @@ function eigengrund_auto_meta_description_fallback() {
     if ( $desc ) {
         echo '<meta name="description" content="' . esc_attr( mb_substr( wp_strip_all_tags( $desc ), 0, 155 ) ) . '">' . "\n";
     }
-}
-
-
-// ── E3: FAQPAGE SCHEMA.ORG ───────────────────────────────────
-// Generiert JSON-LD FAQPage-Schema automatisch aus dem Custom Field
-// "fragen_box" auf Themen-Seiten. Google zeigt diese als Rich Results
-// in den Suchergebnissen an (vergrößerter Eintrag mit aufklappbaren Fragen).
-// Voraussetzung: Themen-Seite hat Custom Field "fragen_box" befüllt.
-
-add_action( 'wp_head', 'eigengrund_faqpage_schema', 5 );
-function eigengrund_faqpage_schema() {
-    if ( ! is_page() ) return;
-    if ( get_page_template_slug() !== 'page-thema.php' ) return;
-
-    $fragen_raw = get_post_meta( get_the_ID(), 'fragen_box', true );
-    if ( ! $fragen_raw ) return;
-
-    $fragen = array_filter( array_map( 'trim', explode( "\n", $fragen_raw ) ) );
-    if ( empty( $fragen ) ) return;
-
-    // Für FAQPage braucht jede Frage eine Antwort.
-    // Wir nutzen den Seiten-Excerpt oder den Seiten-Titel als generische Antwort,
-    // da die echten Antworten im Seiteninhalt stehen (LLMs lesen den Inhalt).
-    $seiten_titel = get_the_title();
-    $seiten_url   = get_permalink();
-    $excerpt      = wp_strip_all_tags( get_the_excerpt() );
-    $antwort_basis = $excerpt
-        ? $excerpt
-        : 'Mehr dazu auf dieser Seite: ' . $seiten_titel . '.';
-
-    $items = array();
-    foreach ( $fragen as $frage ) {
-        $frage = trim( $frage, '"„"\'–' );
-        if ( ! $frage ) continue;
-        $items[] = array(
-            '@type'          => 'Question',
-            'name'           => $frage,
-            'acceptedAnswer' => array(
-                '@type' => 'Answer',
-                'text'  => $antwort_basis . ' Weiterlesen: ' . $seiten_url,
-            ),
-        );
-    }
-
-    if ( empty( $items ) ) return;
-
-    $schema = array(
-        '@context'   => 'https://schema.org',
-        '@type'      => 'FAQPage',
-        'mainEntity' => $items,
-    );
-
-    echo "\n" . '<script type="application/ld+json">'
-        . wp_json_encode( $schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES )
-        . '</script>' . "\n";
 }
 
 
