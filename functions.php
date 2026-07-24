@@ -355,7 +355,7 @@ add_action( 'init', function() {
 // SEO & AUTOMATISIERUNGEN
 // Hinzugefügt: April 2026
 // Enthält: B3 Open Graph · B4 Canonical · E1 Auto-Meta-Description
-//          E4 Article Schema · E5 Font-Preload
+//          E5 Font-Preload
 // ============================================================
 
 
@@ -535,58 +535,6 @@ function eigengrund_auto_meta_description_fallback() {
     }
 }
 
-
-// ── E4: ARTICLE SCHEMA.ORG ───────────────────────────────────
-// Generiert Article-Schema für Themen-Seiten und Prozess-Seiten.
-// Signalisiert Suchmaschinen und LLMs: "Das ist redaktionell geprüfter
-// Originalinhalt von identifizierbaren Autoren, kein automatisch
-// generierter Text."
-// Erfahrungsberichte: das Plugin regelt das separat.
-
-add_action( 'wp_head', 'eigengrund_article_schema', 6 );
-function eigengrund_article_schema() {
-    if ( ! is_page() ) return;
-
-    $template = get_page_template_slug( get_the_ID() );
-    $relevant = array( 'page-thema.php', 'page-prozess.php' );
-    if ( ! in_array( $template, $relevant, true ) ) return;
-
-    $cluster = get_post_meta( get_the_ID(), 'prozess_cluster', true ) ?: '';
-    $thema   = get_post_meta( get_the_ID(), 'thema_tag',       true ) ?: 'Thema';
-
-    $schema = array(
-        '@context'        => 'https://schema.org',
-        '@type'           => 'Article',
-        'headline'        => get_the_title(),
-        'description'     => mb_substr( wp_strip_all_tags( get_the_excerpt() ), 0, 155 ),
-        'url'             => get_permalink(),
-        'dateModified'    => get_the_modified_date( 'c' ),
-        'datePublished'   => get_the_date( 'c' ),
-        'inLanguage'      => 'de-DE',
-        'author'          => array(
-            array( '@type' => 'Person', 'name' => 'Malte Röhrig',  'url' => home_url( '/ueber-uns' ) ),
-            array( '@type' => 'Person', 'name' => 'Sandra',        'url' => home_url( '/ueber-uns' ) ),
-        ),
-        'publisher'       => array(
-            '@type' => 'Organization',
-            'name'  => 'eigengrund.space',
-            'url'   => home_url( '/' ),
-        ),
-        'about'           => array(
-            '@type' => 'Thing',
-            'name'  => $cluster ?: $thema,
-        ),
-        'isPartOf'        => array(
-            '@type' => 'WebSite',
-            'name'  => 'eigengrund.space',
-            'url'   => home_url( '/' ),
-        ),
-    );
-
-    echo "\n" . '<script type="application/ld+json">'
-        . wp_json_encode( $schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES )
-        . '</script>' . "\n";
-}
 
 // ── PMPRO COOKIES DEAKTIVIEREN ───────────────────────────────
 add_filter( 'pmpro_set_cookie', '__return_false' );
