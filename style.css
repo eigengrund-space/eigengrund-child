@@ -1135,8 +1135,6 @@ ol.wp-block-list {
   max-width: 720px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
 }
 /* Reset: einzelne Kinder brauchen kein eigenes max-width mehr */
 .page:not(.page-template-page-startseite) .entry-content > * {
