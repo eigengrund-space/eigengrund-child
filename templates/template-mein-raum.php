@@ -113,7 +113,7 @@ get_header(); ?>
 
     <nav class="eg-mr-nav">
       <div class="eg-mr-nav-list">
-        <div class="eg-mr-nav-label">Konto</div>
+        <div class="eg-mr-nav-label">Navigation</div>
         <?php
         $nav_items = [
           ['label' => 'Übersicht',          'path' => '/mein-raum/'],
