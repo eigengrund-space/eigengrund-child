@@ -99,7 +99,7 @@ get_header(); ?>
 
 <div class="eg-mr-wrap">
 
-  <div class="eg-tag" style="margin-bottom:.75rem;">Mein Raum</div> <br> <br> <br>
+  <div class="eg-tag" style="margin-bottom:.75rem;">Übersicht</div> <br> <br> <br>
 
   <h1 style="margin-top:0;margin-bottom:26px;">Willkommen, <em style="color:var(--eg-amber);"><?php echo do_shortcode('[pmpro_member field="first_name"]'); ?></em></h1>
 
@@ -116,9 +116,9 @@ get_header(); ?>
         <div class="eg-mr-nav-label">Konto</div>
         <?php
         $nav_items = [
-          ['label' => 'Mein Raum',         'path' => '/mein-raum/'],
-          ['label' => 'Konto verwalten',    'path' => '/kontodaten/'],
-          ['label' => 'Buchung ändern',     'path' => '/pakete/'],
+          ['label' => 'Übersicht',          'path' => '/mein-raum/'],
+          ['label' => 'Konto',              'path' => '/kontodaten/'],
+          ['label' => 'Buchung',            'path' => '/pakete/'],
         ];
         $current_path = trailingslashit(parse_url(home_url($_SERVER['REQUEST_URI']), PHP_URL_PATH));
 
