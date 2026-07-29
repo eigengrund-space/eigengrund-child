@@ -219,7 +219,7 @@ function eg_start_erfahrungsberichte_sc() {
                 $al = get_post_meta(get_the_ID(),'eb_alter',true);
                 $ab = get_post_meta(get_the_ID(),'eb_abschluss',true);
                 $si = get_post_meta(get_the_ID(),'eb_sichtbar',true);
-                $gesperrt = ($si==='mitglieder' && !in_array('eg_mitglied', (array) wp_get_current_user()->roles)) || ($si==='angemeldet' && !is_user_logged_in());
+                $gesperrt = ($si==='mitglieder' && !eg_eb_hat_level(array(3))) || ($si==='angemeldet' && !eg_eb_hat_level(array(2,3)));
             ?>
             <div class="eg-sc-eb-card">
                 <div class="eg-sc-eb-person"><?php echo esc_html($vn.($al?' · '.$al:'')); ?></div>

@@ -21,11 +21,11 @@ if ( $eb_status_check !== 'freigegeben' && ! current_user_can('edit_posts') ) {
 }
 
 // Sichtbarkeit prüfen
-if ( $eb_sichtbar_check === 'mitglieder' && ! in_array('eg_mitglied', (array) wp_get_current_user()->roles) && ! current_user_can('administrator') ) {
+if ( $eb_sichtbar_check === 'mitglieder' && ! eg_eb_hat_level( array( 3 ) ) ) {
     wp_redirect( home_url('/anmelden') );
     exit;
 }
-if ( $eb_sichtbar_check === 'angemeldet' && ! is_user_logged_in() ) {
+if ( $eb_sichtbar_check === 'angemeldet' && ! eg_eb_hat_level( array( 2, 3 ) ) ) {
     wp_redirect( home_url('/anmelden') );
     exit;
 }
