@@ -447,7 +447,10 @@ body.eg-dark .eg-toggle-thumb {
   background: var(--eg-btn-bg);
   color: var(--eg-btn-txt);
 }
-.eg-btn--primary:hover { opacity: .88; }
+.eg-btn--primary:hover {
+  background: var(--global-palette4);
+  color: var(--eg-btn-txt);
+}
 
 /* Ghost: umrandet */
 .eg-btn--ghost {
