@@ -788,3 +788,60 @@ function eg_mein_raum_fortschritt_sc( $atts ) {
 
     return sprintf( 'Einheit %d von %d', $tag, $max_einheiten );
 }
+
+/**
+ * Bei PMPro-Checkout: wenn Newsletter-Checkbox angehakt wurde,
+ * Kontakt per Brevo API v3 zur Newsletter-Liste hinzufügen
+ * und Einwilligungs-Zeitstempel als Nachweis speichern.
+ */
+add_action('pmpro_after_checkout', 'eg_pmpro_brevo_newsletter_optin', 10, 1);
+function eg_pmpro_brevo_newsletter_optin($user_id) {
+
+    if (empty($_REQUEST['newsletter_optin'])) {
+        return;
+    }
+
+    $user = get_userdata($user_id);
+    if (!$user || empty($user->user_email)) {
+        return;
+    }
+
+    update_user_meta($user_id, 'eg_newsletter_optin_timestamp', current_time('mysql'));
+    update_user_meta($user_id, 'eg_newsletter_optin_source', 'pmpro_checkout');
+
+    if (!defined('BREVO_API_KEY') || empty(BREVO_API_KEY)) {
+        error_log('BREVO_API_KEY nicht verfügbar – Newsletter-Sync übersprungen.');
+        return;
+    }
+
+    $brevo_list_id = 2;
+
+    $response = wp_remote_post('https://api.brevo.com/v3/contacts', array(
+        'headers' => array(
+            'api-key'      => BREVO_API_KEY,
+            'Content-Type' => 'application/json',
+        ),
+        'body' => wp_json_encode(array(
+            'email'         => $user->user_email,
+            'listIds'       => array($brevo_list_id),
+            'updateEnabled' => true,
+            'attributes'    => array(
+                'FIRSTNAME' => $user->first_name,
+                'LASTNAME'  => $user->last_name,
+            ),
+        )),
+        'timeout' => 15,
+    ));
+
+    if (is_wp_error($response)) {
+        error_log('Brevo Newsletter Opt-in Fehler: ' . $response->get_error_message());
+        return;
+    }
+
+    $code = wp_remote_retrieve_response_code($response);
+    if ($code >= 200 && $code < 300) {
+        update_user_meta($user_id, 'eg_newsletter_brevo_synced', 'yes');
+    } else {
+        error_log('Brevo API Fehler (' . $code . '): ' . wp_remote_retrieve_body($response));
+    }
+}
