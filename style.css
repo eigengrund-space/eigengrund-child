@@ -36,6 +36,7 @@ Text Domain:  eigengrund-child
    21. KARTEN-SYSTEM v2       - .eg-card neu
    22. EMOTIONSRAEUME         - .eg-raum, .eg-einheit etc.
    23. SHORTCODE-KLASSEN      - .eg-sc-*, .eg-nl-*, .eg-pfeil-liste
+   24. SECTION-RHYTHMUS       - .eg-section Varianten a/b/akzent
 
    ============================================================ */
 
@@ -58,6 +59,13 @@ Text Domain:  eigengrund-child
   --eg-bg-disc:         rgba(30,27,20,.04);     /* Disclaimer */
   --eg-bg-success:      rgba(212,149,106,.09);  /* Erfolgs-Meldung */
   --eg-bg-section:      #F0E8D8;   /* Abschnitt-Hintergrund */
+
+  /* ── FARBEN: ABSCHNITTS-RHYTHMUS ── */
+  --eg-sec-a:            #FFFFFF;   /* Abschnitt hell */
+  --eg-sec-b:            #F0E8D8;   /* Abschnitt creme */
+  --eg-sec-akzent:       #4A4038;   /* Abschnitt dunkel, sparsam */
+  --eg-sec-b-card:       #FFFFFF;   /* Karten auf Creme-Abschnitt */
+  --eg-sec-b-card-hover: #FAF6EE;
 
   /* ── TEXT ── */
   --eg-text:            #1C1B19;   /* Haupttext */
@@ -160,6 +168,12 @@ body.eg-dark {
   --eg-bg-disc:         rgba(237,229,213,.04);
   --eg-bg-success:      rgba(212,149,106,.08);
   --eg-bg-section:      #1A140C;
+
+  --eg-sec-a:            #16120C;
+  --eg-sec-b:            #1E1810;
+  --eg-sec-akzent:       #2A2118;
+  --eg-sec-b-card:       #251E14;
+  --eg-sec-b-card-hover: #2C2418;
 
   --eg-text:            #EDE5D5;
   --eg-text-muted:      rgba(237,229,213,.82);
@@ -2129,4 +2143,43 @@ body.eg-dark #colophon {
 }
 @media (max-width: 680px) {
   .eg-sc-cta { padding: 3rem 1.25rem; }
+}
+
+/* ============================================================
+   24. SECTION-RHYTHMUS
+   ============================================================ */
+
+.eg-section {
+  padding: 5rem 1.5rem;
+  transition: background-color var(--eg-transition-slow);
+}
+.eg-section--a { background: var(--eg-sec-a); }
+.eg-section--b { background: var(--eg-sec-b); }
+.eg-section--akzent {
+  background: var(--eg-sec-akzent);
+  color: #F2F0EB;
+}
+.eg-section--akzent h2,
+.eg-section--akzent h3,
+.eg-section--akzent p { color: #F2F0EB; }
+.eg-section--akzent a { color: #D4956A; }
+
+.eg-section__inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.eg-section--b .eg-card,
+.eg-section--b .eg-einheit,
+.eg-section--b .eg-sc-eb-card {
+  background: var(--eg-sec-b-card);
+}
+.eg-section--b .eg-card--link:hover,
+.eg-section--b .eg-card--nav:hover,
+.eg-section--b .eg-sc-eb-card:hover {
+  background: var(--eg-sec-b-card-hover);
+}
+
+@media (max-width: 680px) {
+  .eg-section { padding: 3rem 1.25rem; }
 }
