@@ -168,6 +168,7 @@ body.eg-dark {
   --eg-bg-disc:         rgba(237,229,213,.04);
   --eg-bg-success:      rgba(212,149,106,.08);
   --eg-bg-section:      #1A140C;
+  --eg-hover-surface:   #241C12;   /* Eine Stufe heller als die Karte: Hover-Flaechen */
 
   --eg-sec-a:            #16120C;
   --eg-sec-b:            #1E1810;
@@ -207,6 +208,25 @@ body.eg-dark {
 
   --eg-modal-bg:        rgba(8,6,3,.75);
   --eg-btn-shadow:      0 4px 14px rgba(212,149,106,.15);
+
+  /* ── KADENCE-PALETTE IM NACHT-MODUS ──
+     Die Palette-Variablen wurden bisher nur in :root gesetzt und blieben
+     im Nacht-Modus auf den Tag-Werten stehen. Weil die Emotionsraeume-,
+     Karten- und Bogen-Klassen (style.css Abschnitt 21-23) auf sie zeigen,
+     blieb dort die gesamte Oberflaeche hell.
+     Alle Zuweisungen verweisen auf --eg-Tokens, damit es nur eine Stelle
+     zum Pflegen gibt.
+     ── */
+
+  --global-palette1: var(--eg-amber);          /* Akzent: Haekchen, Fokus-Rahmen */
+  --global-palette2: var(--eg-accent);         /* Links, Tags */
+  --global-palette3: var(--eg-text);           /* Haupttext, Titel, Fragen */
+  --global-palette4: var(--eg-amber-hover);    /* Akzent-Hover */
+  --global-palette5: var(--eg-text-muted);     /* Fliesstext, Labels */
+  --global-palette6: var(--eg-text-faint);     /* Nummern, Sublabels */
+  --global-palette7: var(--eg-hover-surface);  /* Hover-Flaeche */
+  --global-palette8: var(--eg-bg);             /* Seitenhintergrund */
+  --global-palette9: var(--eg-bg-card);        /* Kartenflaeche */
 }
 
 /* ============================================================
