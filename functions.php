@@ -845,3 +845,78 @@ function eg_pmpro_brevo_newsletter_optin($user_id) {
         error_log('Brevo API Fehler (' . $code . '): ' . wp_remote_retrieve_body($response));
     }
 }
+
+// ── DSGVO: BESTAETIGUNGSLINK AUF WP-LOGIN.PHP ZWINGEN ────────────────
+
+/**
+ * Baut einen Privacy-Bestaetigungslink auf wp-login.php um.
+ *
+ * PMPro filtert 'login_url' global auf die eigene /login/-Seite
+ * (pmpro_login_url_filter, Prioritaet 50, gesetzt auf wp_loaded). Der
+ * Bestaetigungslink aus wp_send_user_request() entsteht ueber
+ * wp_login_url() und erbt diese Umschreibung.
+ *
+ * Auf der /login/-Seite wird die Action nicht verarbeitet: der switch in
+ * pmpro_login_forms_handler() vergleicht mit 'confirmation', WordPress
+ * sendet action='confirmaction'. pmpro_confirmaction_handler() wird
+ * dadurch nicht aufgerufen.
+ *
+ * Gibt die URL unveraendert zurueck, wenn sie ohnehin schon auf
+ * wp-login.php zeigt (PMPro inaktiv oder keine Login-Seite gesetzt).
+ */
+function eg_privacy_confirm_url_reparieren( $url ) {
+    $wp_login = site_url( 'wp-login.php', 'login' );
+
+    if ( strpos( $url, $wp_login ) === 0 ) {
+        return $url;
+    }
+
+    $query = wp_parse_url( $url, PHP_URL_QUERY );
+    if ( empty( $query ) ) {
+        return $url;
+    }
+
+    parse_str( $query, $args );
+
+    // Ausschliesslich diesen einen Link-Typ anfassen.
+    if ( empty( $args['action'] ) || $args['action'] !== 'confirmaction' ) {
+        return $url;
+    }
+
+    unset( $args['redirect_to'] ); // von PMPro evtl. angehaengt, hier sinnlos
+
+    return add_query_arg( $args, $wp_login );
+}
+
+/**
+ * Ersetzt ###CONFIRM_URL### selbst, mit korrigierter URL.
+ *
+ * Der Core setzt den Platzhalter erst NACH diesem Filter ein, und zwar aus
+ * $email_data['confirm_url']. Das Array erreicht uns per Wert, Aenderungen
+ * daran wirken nicht. Deshalb ersetzen wir den Platzhalter hier selbst –
+ * der Core findet ihn danach nicht mehr und laesst unsere URL stehen.
+ *
+ * Greift fuer Export- UND Loeschanfragen (beide nutzen
+ * wp_send_user_request()). Normale Mitglieder-Logins bleiben unberuehrt:
+ * es wird kein globaler login_url-Filter veraendert, und
+ * Passwort-Reset-Mails fasst diese Funktion nicht an – die verarbeitet
+ * PMPro auf /login/ selbst und korrekt.
+ */
+function eg_privacy_bestaetigungsmail_url( $content, $email_data ) {
+    if ( empty( $email_data['confirm_url'] ) ) {
+        return $content;
+    }
+
+    $korrigiert = eg_privacy_confirm_url_reparieren( $email_data['confirm_url'] );
+    if ( $korrigiert === $email_data['confirm_url'] ) {
+        return $content;
+    }
+
+    // Regulaerer Weg: Platzhalter vor dem Core ersetzen.
+    $content = str_replace( '###CONFIRM_URL###', sanitize_url( $korrigiert ), $content );
+    // Fallback, falls eine Vorlage die URL bereits ausgeschrieben enthaelt.
+    $content = str_replace( $email_data['confirm_url'], $korrigiert, $content );
+
+    return $content;
+}
+add_filter( 'user_request_action_email_content', 'eg_privacy_bestaetigungsmail_url', 10, 2 );
