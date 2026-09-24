@@ -225,7 +225,7 @@ function eg_start_erfahrungsberichte_sc() {
                 <div class="eg-sc-eb-person"><?php echo esc_html($vn.($al?' · '.$al:'')); ?></div>
                 <?php if($ab): ?><div class="eg-sc-eb-quote">&bdquo;<?php echo esc_html($ab); ?>&ldquo;</div><?php endif; ?>
                 <?php if($gesperrt): ?>
-                <a href="<?php echo esc_url(home_url('/anmelden')); ?>" class="eg-sc-eb-link">🔒 Kostenlos anmelden</a>
+                <a href="<?php the_permalink(); ?>" class="eg-sc-eb-link">🔒 Weiterlesen →</a>
                 <?php else: ?>
                 <a href="<?php the_permalink(); ?>" class="eg-sc-eb-link">Bericht lesen →</a>
                 <?php endif; ?>

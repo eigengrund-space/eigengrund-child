@@ -6,7 +6,8 @@
 
 // ── ZUGRIFFSKONTROLLE ────────────────────────────────────────
 // Prüft ob der Besucher diesen Bericht sehen darf.
-// Falls nicht → Weiterleitung zur Anmelden-Seite.
+// Falls nicht → Sperrhinweis samt Login-Formular auf DIESER Seite (weiter unten),
+// damit der Besucher nach dem Login wieder genau hier landet.
 $eb_sichtbar_check = get_post_meta(get_the_ID(), 'eb_sichtbar', true) ?: 'oeffentlich';
 $eb_status_check   = get_post_meta(get_the_ID(), 'eb_status',   true) ?: 'eingereicht';
 
@@ -20,14 +21,24 @@ if ( $eb_status_check !== 'freigegeben' && ! current_user_can('edit_posts') ) {
     exit;
 }
 
-// Sichtbarkeit prüfen
-if ( $eb_sichtbar_check === 'mitglieder' && ! eg_eb_hat_level( array( 3 ) ) ) {
-    wp_redirect( home_url('/anmelden') );
-    exit;
+// Sichtbarkeit prüfen – bewusst kein wp_redirect() nach /anmelden mehr.
+// eg_eb_hat_level() kapselt das Membership-Plugin (aktuell PMPro), deshalb
+// bleibt diese Datei bei einem späteren Wechsel zu MemberPress unverändert.
+$eb_zugang = true;
+if ( $eb_sichtbar_check === 'mitglieder' ) {
+    $eb_zugang = eg_eb_hat_level( array( 3 ) );
+} elseif ( $eb_sichtbar_check === 'angemeldet' ) {
+    $eb_zugang = eg_eb_hat_level( array( 2, 3 ) );
 }
-if ( $eb_sichtbar_check === 'angemeldet' && ! eg_eb_hat_level( array( 2, 3 ) ) ) {
-    wp_redirect( home_url('/anmelden') );
-    exit;
+
+// Bewusst KEIN noindex im Sperrfall: die Sperrseite liefert Kurzprofil, Teaser
+// und Abschlusszitat aus und soll indexiert werden. Der Volltext steht dann gar
+// nicht erst im HTML – Google sieht exakt dasselbe wie jeder nicht eingeloggte
+// Besucher, also kein Cloaking.
+// nocache_headers() bleibt trotzdem: sonst könnte ein Seiten-Cache die
+// Sperrseite an Mitglieder oder den Volltext an Gäste ausliefern.
+if ( ! $eb_zugang ) {
+    nocache_headers();
 }
 
 get_header();
@@ -81,10 +92,101 @@ $sicht_label = $sicht_labels[$sichtbar]??'Öffentlich';
 .egeb-krise-label{display:inline-block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--eg-text-faint);margin-right:.6rem;font-weight:300;}
 .egeb-krise strong{font-weight:400;color:var(--eg-text);}
 
+/* Sperrhinweis – ersetzt die frühere Weiterleitung nach /anmelden */
+.egeb-gate{margin-top:2.5rem;background:var(--eg-bg-hint);border:.5px solid var(--eg-tag-b);border-radius:2px;padding:2rem;}
+.egeb-gate-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--eg-text-faint);margin-bottom:.85rem;font-family:var(--eg-font-sans);font-weight:300;}
+.egeb-gate-text{font-family:var(--eg-font-serif);font-weight:300;font-size:17px;line-height:1.75;color:var(--eg-text-muted);margin-bottom:1.5rem;}
+.egeb-gate form{margin:0;}
+.egeb-gate label{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--eg-text-faint);margin-bottom:1rem;font-family:var(--eg-font-sans);font-weight:300;}
+.egeb-gate input[type=text],.egeb-gate input[type=password]{display:block;width:100%;margin-top:.4rem;padding:.6rem .75rem;border:.5px solid var(--eg-border-mid);border-radius:2px;background:#fff;font-family:var(--eg-font-sans);font-size:14px;color:var(--eg-text);}
+.egeb-gate .login-remember label{text-transform:none;letter-spacing:0;font-size:12px;}
+.egeb-gate input[type=submit]{font-family:var(--eg-font-sans);font-weight:400;font-size:12px;letter-spacing:.08em;text-transform:uppercase;background:var(--eg-btn-bg);color:var(--eg-btn-txt);padding:.75rem 1.75rem;border:0;border-radius:2px;cursor:pointer;transition:opacity .2s;}
+.egeb-gate input[type=submit]:hover{opacity:.88;}
+.egeb-gate-cta{display:inline-block;font-family:var(--eg-font-sans);font-weight:400;font-size:12px;letter-spacing:.08em;text-transform:uppercase;background:var(--eg-btn-bg);color:var(--eg-btn-txt);padding:.75rem 1.75rem;border-radius:2px;text-decoration:none;transition:opacity .2s;}
+.egeb-gate-cta:hover{opacity:.88;}
+.egeb-gate-alt{margin-top:1.35rem;font-size:13px;line-height:1.75;color:var(--eg-text-faint);font-family:var(--eg-font-sans);}
+.egeb-gate-alt a{color:var(--eg-accent);text-decoration:none;}
+.egeb-gate-alt a:hover{color:var(--eg-amber);}
+.egeb-gate-intro{font-family:var(--eg-font-serif);font-weight:300;font-size:clamp(16px,1.8vw,19px);line-height:1.9;color:var(--eg-text-muted);margin-top:2rem;}
+
 @media(max-width:680px){.egeb-wrap{padding:0 1.25rem;}.egeb-header-top{flex-direction:column;gap:.75rem;}}
 </style>
 
 <div class="egeb-wrap">
+
+<?php if ( ! $eb_zugang ) : ?>
+<!-- ── GESPERRTER BERICHT ──────────────────────────────────────
+     Kein Redirect nach /anmelden: Login findet hier statt, damit der Besucher
+     danach direkt auf diesem Bericht landet (redirect => Permalink).
+     Kurzprofil, Teaser und Zitat stehen bewusst im HTML – diese Seite soll
+     indexiert werden. Der Volltext wird hier NICHT ausgegeben. -->
+<div class="egeb-bc">
+    <a href="<?php echo esc_url(home_url('/')); ?>">eigengrund.space</a> /
+    <a href="<?php echo esc_url(home_url('/alle-berichte')); ?>">Erfahrungsberichte</a> /
+    <?php echo esc_html($vorname ?: get_the_title()); ?>
+</div>
+
+<div class="egeb-header-top">
+    <div class="egeb-header-copy">
+        <div class="egeb-header-person">
+            <?php echo esc_html(implode(' · ', array_filter(array($vorname, $alter)))); ?>
+        </div>
+        <?php if($beruf): ?>
+        <div class="egeb-beruf"><?php echo esc_html($beruf); ?></div>
+        <?php endif; ?>
+    </div>
+
+    <span class="egeb-sicht egeb-sicht--<?php echo esc_attr($sichtbar);?>"><?php echo esc_html($sicht_label);?></span>
+</div>
+
+<div class="egeb-rule"></div>
+
+<?php
+// Teaser aus dem Berichtsanfang – dieselbe Helper-Funktion wie auf den Karten,
+// dort mit 30 Wörtern. Hier länger, weil diese Seite den Bericht repräsentiert.
+$eb_teaser = function_exists('eg_eb_get_intro_excerpt') ? eg_eb_get_intro_excerpt( get_the_ID(), 55 ) : '';
+?>
+<?php if($eb_teaser): ?>
+<div class="egeb-gate-intro"><?php echo esc_html($eb_teaser); ?></div>
+<?php endif; ?>
+
+<?php if($abschluss): ?>
+<div class="egeb-untertitel">&bdquo;<?php echo esc_html($abschluss); ?>&ldquo;</div>
+<?php endif; ?>
+
+<div class="egeb-gate">
+    <div class="egeb-gate-label">Zugang erforderlich</div>
+
+    <?php if ( ! is_user_logged_in() ) : ?>
+        <div class="egeb-gate-text"><?php echo esc_html(EG_EB_GESPERRT_TEXT); ?></div>
+        <?php wp_login_form( array(
+            'redirect'       => get_permalink(),
+            'label_username' => 'E-Mail oder Benutzername',
+            'label_password' => 'Passwort',
+            'label_log_in'   => 'Anmelden',
+            'label_remember' => 'Angemeldet bleiben',
+        ) ); ?>
+        <div class="egeb-gate-alt">
+            Noch kein Zugang?
+            <a href="<?php echo esc_url(home_url(EG_EB_GESPERRT_LINK_URL)); ?>"><?php echo esc_html(EG_EB_GESPERRT_LINK_TEXT); ?></a>
+        </div>
+    <?php else : ?>
+        <!-- Eingeloggt, aber Level reicht nicht: Login-Formular wäre hier sinnlos. -->
+        <div class="egeb-gate-text"><?php echo esc_html(EG_EB_UPGRADE_TEXT); ?></div>
+        <a href="<?php echo esc_url(home_url(EG_EB_UPGRADE_LINK_URL)); ?>" class="egeb-gate-cta"><?php echo esc_html(EG_EB_UPGRADE_LINK_TEXT); ?></a>
+    <?php endif; ?>
+</div>
+
+<!-- Krisenhinweis auch hier: erscheint auf allen Erfahrungsberichten -->
+<div class="egeb-krise">
+    <span class="egeb-krise-label">Hinweis</span>
+    Diese Seite ersetzt keine professionelle Begleitung. Wenn du gerade an einem Punkt bist, wo du nicht mehr weiterweißt &ndash; oder wenn du in einer Krise bist &ndash; bitte ruf an: <strong>Telefonseelsorge 0800 111 0 111</strong> (kostenlos, 24/7, anonym).
+</div>
+
+<a href="<?php echo esc_url(home_url('/alle-berichte'));?>" class="egeb-back">&larr; Alle Erfahrungsberichte</a>
+<br>
+</div>
+<?php get_footer(); return; endif; ?>
 <?php while(have_posts()):the_post();
 
 // ── NAVIGATION ───────────────────────────────────────────────
