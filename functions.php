@@ -8,25 +8,42 @@
 
 add_action( 'wp_enqueue_scripts', 'eigengrund_enqueue' );
 function eigengrund_enqueue() {
+    // Version = Aenderungszeit der Datei statt einer festen Nummer: Nach jedem
+    // Deploy aendert sich die URL, Browser laden die Datei neu. Der feste
+    // Version:-Header im style.css tat das nicht – Besucher mit gecachtem
+    // Stylesheet sahen Aenderungen erst nach einem harten Reload.
+    $stil    = get_stylesheet_directory() . '/style.css';
+    $fonts   = get_stylesheet_directory() . '/fonts/fonts.css';
+    $toggle  = get_stylesheet_directory() . '/js/toggle.js';
+
     wp_enqueue_style( 'eigengrund-fonts',
         get_stylesheet_directory_uri() . '/fonts/fonts.css',
-        array(), '1.0.0' );
+        array(), eigengrund_asset_version( $fonts ) );
     wp_enqueue_style( 'kadence-style',
         get_template_directory_uri() . '/style.css',
         array(), wp_get_theme( 'kadence' )->get( 'Version' ) );
     wp_enqueue_style( 'eigengrund-child-style',
         get_stylesheet_directory_uri() . '/style.css',
-        array( 'kadence-style' ), wp_get_theme()->get( 'Version' ) );
+        array( 'kadence-style' ), eigengrund_asset_version( $stil ) );
     wp_enqueue_script( 'eigengrund-toggle',
         get_stylesheet_directory_uri() . '/js/toggle.js',
-        array(), '1.0.0', true );
+        array(), eigengrund_asset_version( $toggle ), true );
+}
+
+/**
+ * Dateizeit als Asset-Version. Faellt auf die Theme-Version zurueck, falls die
+ * Datei nicht lesbar ist (z. B. unvollstaendiger Deploy) – dann bleibt die
+ * Seite benutzbar, nur das Cache-Busting greift fuer diese Datei nicht.
+ */
+function eigengrund_asset_version( $pfad ) {
+    return file_exists( $pfad ) ? (string) filemtime( $pfad ) : wp_get_theme()->get( 'Version' );
 }
 
 add_action( 'enqueue_block_editor_assets', 'eigengrund_editor_fonts' );
 function eigengrund_editor_fonts() {
     wp_enqueue_style( 'eigengrund-fonts-editor',
         get_stylesheet_directory_uri() . '/fonts/fonts.css',
-        array(), '1.0.0' );
+        array(), eigengrund_asset_version( get_stylesheet_directory() . '/fonts/fonts.css' ) );
 }
 
 

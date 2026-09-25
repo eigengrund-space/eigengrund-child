@@ -39,6 +39,7 @@ Text Domain:  eigengrund-child
    22. EMOTIONSRAEUME         - .eg-raum, .eg-einheit etc.
    23. SHORTCODE-KLASSEN      - .eg-sc-*, .eg-nl-*, .eg-pfeil-liste
    24. SECTION-RHYTHMUS       - .eg-section Varianten a/b/akzent
+   25. LIVE-ABEND-KARTE       - .eg-na, Datumsblock, Gastgeber-Fuss
 
    ============================================================ */
 
@@ -164,6 +165,20 @@ Text Domain:  eigengrund-child
 body.eg-dark {
   --eg-bg:              #16120C;
   --eg-bg-card:         #1E180F;
+  /* Alt-Tokens: --eg-card, --eg-muted, --eg-muted-light und --eg-amber-muted
+     werden noch an mehreren Stellen genutzt (Footer, Video-Platzhalter,
+     emotionsraum.css, eigengrund-eventkarten), sind aber nur in :root
+     definiert. Statt jede Fundstelle einzeln umzustellen, bekommen sie hier
+     zentral ihre Nacht-Entsprechung.
+     --eg-muted-light mit eigenem Wert statt Alias: Es ist die blasseste
+     Textstufe und setzt die Deckkraft-Leiter fort (muted .82 → faint .62 →
+     .45). Ein Alias auf --eg-text-faint haette es mit --eg-muted gleichgezogen.
+     --eg-amber-muted: Die Nacht-Amber #D4956A ist praktisch derselbe Ton wie
+     das gedaempfte Terracotta #C4937A im Tag-Modus. */
+  --eg-card:            var(--eg-bg-card);
+  --eg-muted:           var(--eg-text-faint);
+  --eg-muted-light:     rgba(237,229,213,.45);
+  --eg-amber-muted:     var(--eg-amber);
   --eg-bg-input:        #231C11;
   --eg-bg-hint:         rgba(212,149,106,.07);
   --eg-bg-example:      rgba(237,229,213,.03);
@@ -2204,4 +2219,160 @@ body.eg-dark #colophon {
 
 @media (max-width: 680px) {
   .eg-section { padding: 3rem 1.25rem; }
+}
+
+/* ============================================================
+   25. LIVE-ABEND-KARTE
+   Komponente "Nächster Live-Abend" (.eg-na). Im Editor aus einer
+   Gruppe gebaut: links der Datumsblock (.eg-na__datum mit Tag,
+   Zahl, Monat), rechts Eyebrow, Titel, Text und der Fuss
+   (.eg-na__fuss) mit Gastgeber-Foto, Name und Button.
+   Lag bisher im Customizer unter "Zusätzliches CSS".
+
+   --eg-bg-card statt --eg-card: Nur das Alias stellt body.eg-dark
+   um. Mit --eg-card bliebe die Karte im Nachtmodus cremeweiss,
+   waehrend --eg-text auf hell umspringt.
+   ============================================================ */
+
+.eg-na {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: clamp(1.25rem, 3vw, 2.25rem);
+  align-items: start;
+  max-width: 760px;
+  margin: var(--eg-space-lg) auto;
+  padding: clamp(1.4rem, 3vw, 2rem);
+  background: var(--eg-bg-card);
+  border: 1px solid var(--eg-border);
+  border-radius: 18px;
+}
+
+/* Die Gutenberg-Gruppen im Inneren bringen eigene Blockabstaende mit. */
+.eg-na > *,
+.eg-na .wp-block-group > * { margin-block: 0; }
+
+/* ── DATUMSBLOCK ── */
+
+.eg-na__datum {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 6.2rem;
+  padding: 1rem .75rem;
+  background: var(--eg-sec-b);
+  border-radius: 14px;
+  text-align: center;
+}
+.eg-na .eg-na__tag,
+.eg-na .eg-na__monat {
+  font-family: var(--eg-font-sans);
+  font-size: .78rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--eg-text-muted);
+  margin: 0;
+}
+.eg-na .eg-na__zahl {
+  font-family: var(--eg-font-serif);
+  font-weight: 300;
+  font-size: 3.2rem;
+  line-height: 1;
+  color: var(--eg-amber);
+  margin: .2rem 0 .3rem;
+}
+
+/* ── TEXTSPALTE ── */
+
+.eg-na .eg-na__eyebrow {
+  font-family: var(--eg-font-sans);
+  font-size: .78rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--eg-text-faint);
+  margin: 0 0 .5rem;
+}
+.eg-na .eg-na__titel {
+  font-family: var(--eg-font-serif);
+  font-weight: 400;
+  font-size: clamp(1.4rem, 2.6vw, 1.75rem);
+  line-height: 1.25;
+  color: var(--eg-text);
+  margin: 0 0 .6rem;
+}
+.eg-na .eg-na__text {
+  font-family: var(--eg-font-serif);
+  font-size: 1.08rem;
+  line-height: 1.6;
+  color: var(--eg-text-muted);
+  margin: 0 0 1.25rem;
+}
+
+/* ── FUSS: Gastgeber:in + Button ── */
+
+.eg-na__fuss {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  flex-wrap: wrap;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--eg-border);
+}
+.eg-na .eg-na__foto { margin: 0; flex: none; }
+.eg-na .eg-na__foto img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+.eg-na .eg-na__gast {
+  font-family: var(--eg-font-sans);
+  font-size: .8rem;
+  line-height: 1.35;
+  color: var(--eg-text-faint);
+  margin: 0;
+}
+.eg-na .eg-na__gast a {
+  font-family: var(--eg-font-serif);
+  font-size: 1.1rem;
+  color: var(--eg-text);
+  text-decoration: none;
+}
+.eg-na .eg-na__gast a:hover { color: var(--eg-amber); }
+
+/* margin-left:auto schiebt den Button ans rechte Ende des Fusses. */
+.eg-na .eg-na__buttons { margin: 0 0 0 auto; }
+.eg-na .eg-na__button .wp-block-button__link {
+  font-family: var(--eg-font-sans);
+  font-size: .95rem;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--eg-btn-txt);
+  background: var(--eg-btn-bg);
+  border-radius: 999px;
+  padding: .7rem 1.35rem;
+  text-decoration: none;
+}
+.eg-na .eg-na__button .wp-block-button__link:hover {
+  background: var(--eg-amber);
+  color: var(--eg-btn-txt);
+}
+
+/* ── RESPONSIVE ── */
+
+@media (max-width: 560px) {
+  /* Datum wandert ueber den Text und legt sich in eine Zeile. */
+  .eg-na { grid-template-columns: 1fr; }
+  .eg-na__datum {
+    flex-direction: row;
+    gap: .5rem;
+    justify-content: flex-start;
+    min-width: 0;
+    padding: .6rem 1rem;
+    align-items: baseline;
+  }
+  .eg-na .eg-na__zahl { font-size: 1.8rem; margin: 0; }
+  .eg-na .eg-na__buttons { margin: .5rem 0 0; width: 100%; }
 }
