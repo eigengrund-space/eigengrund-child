@@ -2239,7 +2239,7 @@ body.eg-dark #colophon {
   grid-template-columns: auto 1fr;
   gap: clamp(1.25rem, 3vw, 2.25rem);
   align-items: start;
-  max-width: 760px;
+  max-width: 100%;
   margin: var(--eg-space-lg) auto;
   padding: clamp(1.4rem, 3vw, 2rem);
   background: var(--eg-bg-card);
@@ -2247,13 +2247,34 @@ body.eg-dark #colophon {
   border-radius: 18px;
 }
 
-/* Die Gutenberg-Gruppen im Inneren bringen eigene Blockabstaende mit. */
+/* Kadence ist ein klassisches Theme: jeder Gruppen-Block rendert einen
+   zusaetzlichen .wp-block-group__inner-container. Ohne diese Zeile waere
+   das der einzige Grid- bzw. Flex-Kandidat, und Datumsblock, Inhalt und
+   Fuss lagen alle untereinander. display:contents loescht nur die Box
+   des Wrappers, die echten Kinder ruecken eine Ebene hoch. */
+.eg-na .wp-block-group__inner-container { display: contents; }
+
+/* Constrained-Layout von Kadence: die Wrapper und ihre Kinder bekommen
+   sonst eine Inhaltsbreite plus margin-inline:auto und zentrieren sich
+   innerhalb der Karte. Der Button behaelt sein margin-left:auto (siehe
+   Fuss-Abschnitt) und ist darum ausgenommen. */
+.eg-na :where(.wp-block-group__inner-container),
+.eg-na :where(.wp-block-group__inner-container > *) { max-width: none; }
+.eg-na :where(.wp-block-group__inner-container > *:not(.eg-na__buttons)) { margin-inline: 0; }
+
+/* Die Gutenberg-Gruppen im Inneren bringen eigene Blockabstaende mit.
+   :where() haelt die neue Zeile auf der Spezifitaet von .eg-na allein –
+   sonst wuerde sie die Abstaende von .eg-na__titel, __text und __zahl
+   ueberschreiben, die weiter unten mit zwei Klassen stehen. */
 .eg-na > *,
-.eg-na .wp-block-group > * { margin-block: 0; }
+.eg-na .wp-block-group > *,
+.eg-na :where(.wp-block-group__inner-container > *) { margin-block: 0; }
 
 /* ── DATUMSBLOCK ── */
 
 .eg-na__datum {
+  grid-column: 1;
+  align-self: start;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2284,6 +2305,7 @@ body.eg-dark #colophon {
 
 /* ── TEXTSPALTE ── */
 
+.eg-na__inhalt { grid-column: 2; min-width: 0; }
 .eg-na .eg-na__eyebrow {
   font-family: var(--eg-font-sans);
   font-size: .78rem;
@@ -2365,6 +2387,8 @@ body.eg-dark #colophon {
 @media (max-width: 560px) {
   /* Datum wandert ueber den Text und legt sich in eine Zeile. */
   .eg-na { grid-template-columns: 1fr; }
+  .eg-na__datum,
+  .eg-na__inhalt { grid-column: 1; }
   .eg-na__datum {
     flex-direction: row;
     gap: .5rem;
