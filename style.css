@@ -2423,7 +2423,10 @@ body.eg-dark #colophon {
 /* ── Kopf ── */
 .eg-wege__kopf {
   max-width: 560px;
-  margin-bottom: 3.25rem;
+  /* Mittig auf der Seite; die 1.5rem halten ihn auf schmalen Viewports
+     von den Raendern frei (seitliches margin ginge nicht mit auto). */
+  margin: 0 auto 3.25rem;
+  padding: 0 1.5rem;
 }
 .eg-wege h2.eg-wege__titel {
   font-family: var(--eg-font-serif);
