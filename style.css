@@ -2573,12 +2573,13 @@ body.eg-dark #colophon {
 
 /* ── Das stille Zimmer (Tuer zur Seite) ── */
 .eg-wege__zimmer {
-  max-width: 620px;
+  max-width: 520px;
   margin: 4.5rem auto 0;
-  padding: 2.25rem 2rem;
+  padding: 4rem 2.25rem 2.25rem;
   text-align: center;
-  background: var(--eg-bg-section);
-  border-radius: var(--eg-radius-sm);
+  background: transparent;
+  border: .5px solid var(--eg-tag-b);
+  border-radius: 260px 260px var(--eg-radius-sm) var(--eg-radius-sm);
 }
 .eg-wege h3.eg-wege__zimmer-titel {
   font-family: var(--eg-font-serif);
@@ -2656,7 +2657,8 @@ body.eg-dark #colophon {
   }
   .eg-wege__zimmer {
     margin-top: 3.5rem;
-    padding: 1.75rem 1.5rem;
+    padding: 3.25rem 1.5rem 1.75rem;
     text-align: left;
+    border-radius: 200px 200px var(--eg-radius-sm) var(--eg-radius-sm);
   }
 }
