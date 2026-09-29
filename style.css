@@ -2433,6 +2433,8 @@ body.eg-dark #colophon {
   line-height: 1.1;
   color: var(--eg-text);
   margin: 0 0 .75rem;
+  /* Sprungziel des Hero-CTA: Luft fuer den gehaltenen Header. */
+  scroll-margin-top: 7rem;
 }
 .eg-wege p.eg-wege__lead {
   font-family: var(--eg-font-serif);

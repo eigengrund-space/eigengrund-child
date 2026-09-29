@@ -49,6 +49,44 @@ get_header();
     line-height: 1.55; color: var(--eg-hero-muted);
     margin: 0; max-width: 560px;
 }
+/* Einladung unter dem Lead: aufrecht und kleiner, damit sie den
+   Lead nicht doppelt, sondern ihn beantwortet. */
+.egs-einladung {
+    font-family: var(--eg-font-sans); font-weight: 400;
+    font-size: clamp(15px, 1.6vw, 17.5px);
+    line-height: 1.75; color: var(--eg-hero-muted);
+    margin: 1.5rem 0 0; max-width: 480px;
+}
+/* Sanfter Einstieg: baut auf .eg-btn--ghost auf (Kontur, Touch-Target,
+   bekanntes Hover-Verhalten) und stellt nur zwei Dinge um:
+   1. Farben auf die Hero-Tokens, weil --eg-btn-ghost-txt im Nacht-Modus
+      hell wird, der Hero-Verlauf aber immer hell bleibt.
+   2. Keine Versalien - direkt unter einer geduzten Frage waere das
+      der falsche Ton. */
+.egs-cta {
+    margin-top: 1.75rem;
+    font-size: 14px;
+    letter-spacing: .01em;
+    text-transform: none;
+    color: var(--eg-hero-text);
+    border-color: var(--eg-hero-accent);
+}
+.egs-cta:hover {
+    background: rgba(255,255,255,.35);
+    color: var(--eg-hero-text);
+    box-shadow: none;
+}
+.egs-cta:focus-visible {
+    outline: 1.5px solid var(--eg-hero-accent);
+    outline-offset: 4px;
+}
+.egs-cta-pfeil { transition: transform var(--eg-transition); }
+.egs-cta:hover .egs-cta-pfeil { transform: translateY(2px); }
+@media (prefers-reduced-motion: reduce) {
+    .egs-cta:hover { transform: none; }
+    .egs-cta-pfeil { transition: none; }
+    .egs-cta:hover .egs-cta-pfeil { transform: none; }
+}
 
 /* ── BODY: Editor-Inhalt ── */
 .egs-body {
@@ -84,6 +122,16 @@ get_header();
         <p class="egs-lead">
             Vielleicht hast du bisher nur in die falsche Richtung geguckt.
         </p>
+
+        <p class="egs-einladung">
+            Wir sind unterwegs in Richtung Lebendigkeit, Echtheit und Gesundheit.
+            Magst du ein Stück mitgehen?
+        </p>
+
+        <a class="eg-btn eg-btn--ghost egs-cta" href="#eg-wege-titel">
+            Ein Stück mitgehen
+            <span aria-hidden="true" class="egs-cta-pfeil">&darr;</span>
+        </a>
     </div>
 </section>
 
