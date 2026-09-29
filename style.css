@@ -40,6 +40,7 @@ Text Domain:  eigengrund-child
    23. SHORTCODE-KLASSEN      - .eg-sc-*, .eg-nl-*, .eg-pfeil-liste
    24. SECTION-RHYTHMUS       - .eg-section Varianten a/b/akzent
    25. LIVE-ABEND-KARTE       - .eg-na, Datumsblock, Gastgeber-Fuss
+   26. WEGE-STATIONEN         - .eg-wege, Pfad, Stationen, stilles Zimmer
 
    ============================================================ */
 
@@ -2399,4 +2400,265 @@ body.eg-dark #colophon {
   }
   .eg-na .eg-na__zahl { font-size: 1.8rem; margin: 0; }
   .eg-na .eg-na__buttons { margin: .5rem 0 0; width: 100%; }
+}
+
+
+/* ============================================================
+   26. STARTSEITE: EIN STUECK MITGEHEN (.eg-wege)
+   Vier Stationen auf einem gezeichneten Weg + stilles Zimmer.
+   Markup: Custom-HTML-Block "eg-wege.html" auf der Startseite.
+   Nutzt nur bestehende Tokens, funktioniert im Nacht-Modus.
+   ============================================================ */
+
+.eg-wege {
+  background: transparent;
+  padding: var(--eg-space-xl) var(--eg-space-lg);
+  transition: background var(--eg-transition-slow);
+}
+.eg-wege__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ── Kopf ── */
+.eg-wege__kopf {
+  max-width: 560px;
+  margin-bottom: 3.25rem;
+}
+.eg-wege h2.eg-wege__titel {
+  font-family: var(--eg-font-serif);
+  font-weight: 300;
+  font-style: normal;
+  font-size: clamp(30px, 4vw, 46px);
+  line-height: 1.1;
+  color: var(--eg-text);
+  margin: 0 0 .75rem;
+}
+.eg-wege p.eg-wege__lead {
+  font-family: var(--eg-font-serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(17px, 2vw, 21px);
+  line-height: 1.6;
+  color: var(--eg-text-muted);
+  margin: 0;
+}
+
+/* ── Der Weg (Desktop) ── */
+.eg-wege__pfad { position: relative; }
+
+.eg-wege__linie {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 120px;
+  overflow: visible;
+  pointer-events: none;
+}
+.eg-wege__linie path {
+  fill: none;
+  stroke: var(--eg-amber-muted);
+  stroke-width: 1.5;
+  stroke-dasharray: 1 7;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.eg-wege ul.eg-wege__liste {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.eg-wege li.eg-wege__station {
+  position: relative;
+  margin: 0;
+  padding: 44px 1.1rem 0;
+  text-align: center;
+}
+/* Stationen im Tal des Weges beginnen tiefer */
+.eg-wege li.eg-wege__station--tief { padding-top: 124px; }
+
+.eg-wege__station > * {
+  max-width: 240px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Punkt auf dem Weg */
+.eg-wege__punkt {
+  position: absolute;
+  top: 13px;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  margin-left: -7px;
+  border-radius: 50%;
+  background: var(--eg-bg);
+  border: 1.5px solid var(--eg-amber);
+  transition: background var(--eg-transition), opacity .4s ease;
+}
+.eg-wege__station--tief .eg-wege__punkt { top: 93px; }
+
+.eg-wege__station:hover .eg-wege__punkt,
+.eg-wege__station:focus-within .eg-wege__punkt {
+  background: var(--eg-amber);
+}
+
+/* ── Inhalt einer Station ── */
+.eg-wege p.eg-wege__art {
+  font-family: var(--eg-font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.4;
+  color: var(--eg-amber);
+  margin-top: 0;
+  margin-bottom: .3rem;
+}
+.eg-wege h3.eg-wege__name {
+  font-family: var(--eg-font-serif);
+  font-weight: 300;
+  font-style: normal;
+  font-size: clamp(21px, 2.2vw, 25px);
+  line-height: 1.25;
+  color: var(--eg-text);
+  margin-top: 0;
+  margin-bottom: .6rem;
+}
+.eg-wege p.eg-wege__text {
+  font-family: var(--eg-font-sans);
+  font-weight: 400;
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: var(--eg-text-muted);
+  margin-top: 0;
+  margin-bottom: .55rem;
+}
+.eg-wege p.eg-wege__beispiele {
+  font-family: var(--eg-font-sans);
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--eg-text-faint);
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+/* Link: ruhig unterstrichen, eindeutiger Linktext pro Station */
+.eg-wege a.eg-wege__link {
+  display: inline-block;
+  font-family: var(--eg-font-sans);
+  font-size: 13.5px;
+  font-weight: 400;
+  color: var(--eg-accent);
+  text-decoration: underline;
+  text-decoration-color: var(--eg-tag-b);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+  transition: color var(--eg-transition), text-decoration-color var(--eg-transition);
+}
+.eg-wege a.eg-wege__link:hover {
+  color: var(--eg-amber);
+  text-decoration-color: var(--eg-amber);
+}
+.eg-wege a.eg-wege__link:focus-visible {
+  outline: 1.5px solid var(--eg-amber);
+  outline-offset: 4px;
+  border-radius: var(--eg-radius-sm);
+}
+
+/* ── Das stille Zimmer (Tuer zur Seite) ── */
+.eg-wege__zimmer {
+  max-width: 560px;
+  margin: 4.5rem auto 0;
+  text-align: center;
+}
+.eg-wege__zimmer::before {
+  content: "";
+  display: block;
+  width: 36px;
+  height: 0;
+  border-top: .5px solid var(--eg-rule);
+  margin: 0 auto 1.75rem;
+}
+.eg-wege h3.eg-wege__zimmer-titel {
+  font-family: var(--eg-font-serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(20px, 2.2vw, 24px);
+  line-height: 1.3;
+  color: var(--eg-text);
+  margin: 0 0 .6rem;
+}
+.eg-wege p.eg-wege__zimmer-text {
+  font-family: var(--eg-font-sans);
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: var(--eg-text-muted);
+  margin: 0 0 1rem;
+}
+
+/* ── Ein einziger Moment Bewegung: der Weg zeichnet sich,
+      die Punkte erscheinen, wenn er sie erreicht.
+      Nur mit JS (Klasse .js-reveal), sonst ist alles sichtbar. ── */
+.eg-wege.js-reveal .eg-wege__linie {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1.8s cubic-bezier(.45, .05, .25, 1);
+}
+.eg-wege.js-reveal.is-visible .eg-wege__linie {
+  clip-path: inset(0 0 0 0);
+}
+.eg-wege.js-reveal .eg-wege__punkt { opacity: 0; }
+.eg-wege.js-reveal.is-visible .eg-wege__punkt { opacity: 1; }
+.eg-wege.js-reveal.is-visible .eg-wege__station:nth-child(1) .eg-wege__punkt { transition-delay: 0s, .25s; }
+.eg-wege.js-reveal.is-visible .eg-wege__station:nth-child(2) .eg-wege__punkt { transition-delay: 0s, .7s; }
+.eg-wege.js-reveal.is-visible .eg-wege__station:nth-child(3) .eg-wege__punkt { transition-delay: 0s, 1.15s; }
+.eg-wege.js-reveal.is-visible .eg-wege__station:nth-child(4) .eg-wege__punkt { transition-delay: 0s, 1.6s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .eg-wege.js-reveal .eg-wege__linie { clip-path: none; transition: none; }
+  .eg-wege.js-reveal .eg-wege__punkt { opacity: 1; transition: none; }
+}
+
+/* ── Tablet & Mobil: der Weg wird eine senkrechte Linie ── */
+@media (max-width: 900px) {
+  .eg-wege__linie { display: none; }
+
+  .eg-wege ul.eg-wege__liste {
+    grid-template-columns: 1fr;
+    position: relative;
+    padding-left: 34px;
+  }
+  .eg-wege ul.eg-wege__liste::before {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 10px;
+    bottom: 10px;
+    border-left: 1.5px dotted var(--eg-amber-muted);
+  }
+  .eg-wege li.eg-wege__station,
+  .eg-wege li.eg-wege__station--tief {
+    padding: 0;
+    margin-bottom: 2.5rem;
+    text-align: left;
+  }
+  .eg-wege li.eg-wege__station:last-child { margin-bottom: 0; }
+  .eg-wege__station > * {
+    max-width: 480px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .eg-wege__punkt,
+  .eg-wege__station--tief .eg-wege__punkt {
+    top: 5px;
+    left: -34px;
+    margin-left: 0;
+  }
+  .eg-wege__zimmer { text-align: left; margin-top: 3.5rem; }
+  .eg-wege__zimmer::before { margin-left: 0; }
 }
