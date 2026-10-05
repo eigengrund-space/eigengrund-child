@@ -937,3 +937,66 @@ function eg_privacy_bestaetigungsmail_url( $content, $email_data ) {
     return $content;
 }
 add_filter( 'user_request_action_email_content', 'eg_privacy_bestaetigungsmail_url', 10, 2 );
+
+
+// ── TESTIMONIALS: Block-Stil „Stimme“ + Pattern ─────────────
+
+add_action( 'init', 'eigengrund_register_stimme' );
+function eigengrund_register_stimme() {
+
+    register_block_style( 'core/quote', array(
+        'name'         => 'eg-stimme',
+        'label'        => 'Stimme',
+        'inline_style' => '
+            .wp-block-quote.is-style-eg-stimme {
+                border: 0;
+                border-top: .5px solid var(--eg-border);
+                background: none;
+                margin: 0;
+                padding: 1.5rem 0 0;
+            }
+            .wp-block-quote.is-style-eg-stimme p {
+                font-family: var(--eg-font-serif);
+                font-style: italic;
+                font-weight: 300;
+                font-size: clamp(1.15rem, 2vw, 1.35rem);
+                line-height: 1.55;
+                color: var(--eg-text);
+                margin: 0;
+            }
+            .wp-block-quote.is-style-eg-stimme cite {
+                display: block;
+                margin-top: .75rem;
+                font-family: var(--eg-font-sans);
+                font-style: normal;
+                font-size: 13px;
+                letter-spacing: .04em;
+                color: var(--eg-text-faint);
+            }
+            .wp-block-quote.is-style-eg-stimme cite::before { content: "– "; }
+            .eg-stimmen .is-style-eg-stimme + .is-style-eg-stimme { margin-top: 1.75rem; }
+        ',
+    ) );
+
+    register_block_pattern( 'eigengrund/stimmen', array(
+        'title'      => 'eigengrund – Stimmen (Testimonials)',
+        'categories' => array( 'eigengrund' ),
+        'content'    => '<!-- wp:group {"className":"eg-stimmen","layout":{"type":"constrained"}} -->
+<div class="wp-block-group eg-stimmen"><!-- wp:heading -->
+<h2 class="wp-block-heading">Wie andere den Abend erlebt haben</h2>
+<!-- /wp:heading -->
+
+<!-- wp:quote {"className":"is-style-eg-stimme"} -->
+<blockquote class="wp-block-quote is-style-eg-stimme"><!-- wp:paragraph -->
+<p>Erste Stimme – ein bis zwei Sätze.</p>
+<!-- /wp:paragraph --><cite>Vorname, nach dem ersten Abend</cite></blockquote>
+<!-- /wp:quote -->
+
+<!-- wp:quote {"className":"is-style-eg-stimme"} -->
+<blockquote class="wp-block-quote is-style-eg-stimme"><!-- wp:paragraph -->
+<p>Zweite Stimme.</p>
+<!-- /wp:paragraph --><cite>Vorname, Kontext</cite></blockquote>
+<!-- /wp:quote --></div>
+<!-- /wp:group -->',
+    ) );
+}
