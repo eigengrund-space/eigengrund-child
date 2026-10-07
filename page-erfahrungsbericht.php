@@ -154,6 +154,13 @@ $eb_teaser = function_exists('eg_eb_get_intro_excerpt') ? eg_eb_get_intro_excerp
 <div class="egeb-untertitel">&bdquo;<?php echo esc_html($abschluss); ?>&ldquo;</div>
 <?php endif; ?>
 
+<?php
+// Autorenkärtchen bei Berichten aus dem Team (eigengrund-personen). Auch hier,
+// nicht nur beim Volltext: wer den Bericht geschrieben hat, gehört zum
+// öffentlichen Teil der Seite.
+do_action( 'eg_eb_nach_bericht', get_the_ID() );
+?>
+
 <div class="egeb-gate">
     <div class="egeb-gate-label">Zugang erforderlich</div>
 
@@ -256,6 +263,13 @@ if( get_post_type() === 'eg_erfahrung' ){
     <div class="egeb-untertitel">&bdquo;<?php echo esc_html($abschluss); ?>&ldquo;</div>
     <?php endif; ?>
 </div>
+
+<?php
+// Autorenkärtchen bei Berichten aus dem Team (eigengrund-personen). Bewusst
+// außerhalb von .egeb-content: das Schema markiert diesen Container bei
+// zugangsbeschränkten Berichten als zahlungspflichtigen Teil.
+do_action( 'eg_eb_nach_bericht', get_the_ID() );
+?>
 
 <!-- Krisenhinweis: erscheint auf allen Erfahrungsberichten -->
 <div class="egeb-krise">
